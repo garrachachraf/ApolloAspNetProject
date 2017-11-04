@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Apollo.Console", "Apollo.Console\Apollo.Console.csproj", "{A2433975-D555-4E48-8E44-2D07FD32DAE8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Apollo.Data", "Apollo.Data\Apollo.Data.csproj", "{AAC68D3F-F493-420F-8651-CB0E53194093}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Apollo.Domain", "Apollo.Domain\Apollo.Domain.csproj", "{11877A7E-7AD2-47A2-8269-30E7216FA27E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A2433975-D555-4E48-8E44-2D07FD32DAE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2433975-D555-4E48-8E44-2D07FD32DAE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2433975-D555-4E48-8E44-2D07FD32DAE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2433975-D555-4E48-8E44-2D07FD32DAE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AAC68D3F-F493-420F-8651-CB0E53194093}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAC68D3F-F493-420F-8651-CB0E53194093}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAC68D3F-F493-420F-8651-CB0E53194093}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AAC68D3F-F493-420F-8651-CB0E53194093}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11877A7E-7AD2-47A2-8269-30E7216FA27E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11877A7E-7AD2-47A2-8269-30E7216FA27E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11877A7E-7AD2-47A2-8269-30E7216FA27E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11877A7E-7AD2-47A2-8269-30E7216FA27E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
