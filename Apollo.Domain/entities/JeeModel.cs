@@ -1,15 +1,20 @@
+
+
+using MySql.Data.Entity;
+
 namespace Apollo.Domain.entities
 {
     using System;
     using System.Data.Entity;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
-
+    [DbConfigurationType(typeof(MySqlEFConfiguration))]
     public partial class JeeModel : DbContext
     {
         public JeeModel()
             : base("name=JeeModel")
         {
+           // Database.SetInitializer<JeeModel>(new jeeModelContextInitialize());
         }
 
         public virtual DbSet<artwork> artwork { get; set; }
@@ -280,5 +285,15 @@ namespace Apollo.Domain.entities
                 .WithOptional(e => e.whishlist)
                 .HasForeignKey(e => e.whishList_id);
         }
+    }
+    public class jeeModelContextInitialize : DropCreateDatabaseIfModelChanges<JeeModel>
+    {
+        protected override void Seed(JeeModel context)
+        {
+
+            // before exec we Detach Db (Right Click -> Detach | On DB in SQl Server Object Explorer)
+            // else it will tell DB Occupied
+        }
+
     }
 }
