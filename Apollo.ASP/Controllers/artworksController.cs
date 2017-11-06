@@ -6,7 +6,6 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Apollo.ASP.Models;
 using Apollo.Domain.entities;
 
 namespace Apollo.ASP.Controllers
@@ -18,7 +17,8 @@ namespace Apollo.ASP.Controllers
         // GET: artworks
         public ActionResult Index()
         {
-            return View(db.artwork.ToList());
+            var artwork = db.artwork.Include(a => a.user);
+            return View(artwork.ToList());
         }
 
         // GET: artworks/Details/5
@@ -39,6 +39,7 @@ namespace Apollo.ASP.Controllers
         // GET: artworks/Create
         public ActionResult Create()
         {
+            ViewBag.artist_id = new SelectList(db.user, "id", "role");
             return View();
         }
 
@@ -56,6 +57,7 @@ namespace Apollo.ASP.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.artist_id = new SelectList(db.user, "id", "role", artwork.artist_id);
             return View(artwork);
         }
 
@@ -71,6 +73,7 @@ namespace Apollo.ASP.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.artist_id = new SelectList(db.user, "id", "role", artwork.artist_id);
             return View(artwork);
         }
 
@@ -87,6 +90,7 @@ namespace Apollo.ASP.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.artist_id = new SelectList(db.user, "id", "role", artwork.artist_id);
             return View(artwork);
         }
 

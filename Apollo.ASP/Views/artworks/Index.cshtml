@@ -12,6 +12,9 @@
 <table class="table">
     <tr>
         <th>
+            @Html.DisplayNameFor(model => model.user.role)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.category)
         </th>
         <th>
@@ -32,14 +35,14 @@
         <th>
             @Html.DisplayNameFor(model => model.uploadDate)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.artist_id)
-        </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.user.role)
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.category)
         </td>
@@ -60,9 +63,6 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.uploadDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.artist_id)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
