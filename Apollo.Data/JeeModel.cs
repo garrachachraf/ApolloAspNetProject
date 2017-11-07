@@ -1,8 +1,9 @@
 
 
+using Apollo.Domain.entities;
 using MySql.Data.Entity;
 
-namespace Apollo.Domain.entities
+namespace Apollo.Data
 {
     using System;
     using System.Data.Entity;

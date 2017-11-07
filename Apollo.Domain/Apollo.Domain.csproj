@@ -65,7 +65,6 @@
     <Compile Include="entities\event.cs" />
     <Compile Include="entities\follow.cs" />
     <Compile Include="entities\gallery.cs" />
-    <Compile Include="entities\JeeModel.cs" />
     <Compile Include="entities\media.cs" />
     <Compile Include="entities\notification.cs" />
     <Compile Include="entities\orders.cs" />

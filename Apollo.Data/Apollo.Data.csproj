@@ -38,6 +38,14 @@
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="MySql.Data, Version=6.8.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.6.8.8\lib\net45\MySql.Data.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MySql.Data.Entity.EF6, Version=6.8.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.Entity.6.8.8\lib\net45\MySql.Data.Entity.EF6.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -49,7 +57,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="infrastructure\DatabaseFactory.cs" />
     <Compile Include="infrastructure\Disposable.cs" />
     <Compile Include="infrastructure\IDatabaseFactory.cs" />
@@ -57,6 +64,12 @@
     <Compile Include="infrastructure\IUnitOfWork.cs" />
     <Compile Include="infrastructure\RepositoryBase.cs" />
     <Compile Include="infrastructure\UnitOfWork.cs" />
+    <Compile Include="JeeModel.cs" />
+    <Compile Include="Migrations\201711071110284_InitialCreate.cs" />
+    <Compile Include="Migrations\201711071110284_InitialCreate.Designer.cs">
+      <DependentUpon>201711071110284_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -70,6 +83,11 @@
       <Project>{11877a7e-7ad2-47a2-8269-30e7216fa27e}</Project>
       <Name>Apollo.Domain</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201711071110284_InitialCreate.resx">
+      <DependentUpon>201711071110284_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

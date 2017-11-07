@@ -6,18 +6,21 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Apollo.Data;
 using Apollo.Domain.entities;
+using Apollo.Services;
 
 namespace Apollo.ASP.Controllers
 {
     public class artworksController : Controller
     {
         private JeeModel db = new JeeModel();
+        private GestionArtWork ga=new GestionArtWork();
 
         // GET: artworks
         public ActionResult Index()
         {
-            var artwork = db.artwork.Include(a => a.user);
+            var artwork = ga.FindByCondition();
             return View(artwork.ToList());
         }
 
@@ -28,7 +31,7 @@ namespace Apollo.ASP.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            artwork artwork = db.artwork.Find(id);
+            var artwork = db.artwork.Find(id);
             if (artwork == null)
             {
                 return HttpNotFound();
