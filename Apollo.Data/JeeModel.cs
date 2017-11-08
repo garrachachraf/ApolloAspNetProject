@@ -9,7 +9,7 @@ namespace Apollo.Data
     using System.Data.Entity;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
-    [DbConfigurationType(typeof(MySqlEFConfiguration))]
+   [DbConfigurationType(typeof(MySqlEFConfiguration))]
     public partial class JeeModel : DbContext
     {
         public JeeModel()
@@ -32,7 +32,7 @@ namespace Apollo.Data
         public virtual DbSet<ticket> ticket { get; set; }
         public virtual DbSet<user> user { get; set; }
         public virtual DbSet<whishlist> whishlist { get; set; }
-
+        public virtual DbSet<transportJob> TransportJobs { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<artwork>()

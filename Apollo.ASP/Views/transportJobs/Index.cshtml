@@ -1,0 +1,74 @@
+﻿@model IEnumerable<Apollo.Domain.entities.transportJob>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/TransportLayout.cshtml";
+
+}
+@Html.Partial("~/Views/SessionControle.cshtml")
+<link href="~/Content/dataTables.bootstrap4.css" rel="stylesheet">
+
+
+<div class="card mb-3">
+    <div class="card-header">
+        <i class="fa fa-table"></i> Data Table Example
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.title)</th>
+                    <th>@Html.DisplayNameFor(model => model.description)</th>
+                    <th>@Html.DisplayNameFor(model => model.DateDeDebut)</th>
+                    <th>@Html.DisplayNameFor(model => model.DateDeDefin)</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tfoot>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.title)</th>
+                    <th>@Html.DisplayNameFor(model => model.description)</th>
+                    <th>@Html.DisplayNameFor(model => model.DateDeDebut)</th>
+                    <th>@Html.DisplayNameFor(model => model.DateDeDefin)</th>
+                    <th></th>   
+                </tr>
+                </tfoot>
+                
+
+                <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateDeDebut)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateDeDefin)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.title)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.description)
+                        </td>
+                        <td>
+                            
+                            <button id="example" type="button" class="btn btn-default" data-container="body" data-toggle="popover" data-placement="bottom">
+                                Popover on right
+                            </button>
+                        </td>
+                    </tr>
+                }
+                 
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card-footer small text-muted">Updated </div>
+</div>
+<div id="content" style="display:none">
+
+    
+
+</div>

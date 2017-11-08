@@ -21,7 +21,6 @@ namespace Apollo.ASP.Controllers
             var user = db.user.Include(u => u.collection).Include(u => u.whishlist);
             return View(user.ToList());
         }
-
         // GET: users/Details/5
         public ActionResult Details(int? id)
         {

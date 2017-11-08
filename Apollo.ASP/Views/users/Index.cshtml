@@ -12,10 +12,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.collection.description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.whishlist.id)
+            @Html.DisplayNameFor(model => model.id)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.role)
@@ -36,13 +33,7 @@
             @Html.DisplayNameFor(model => model.gender)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.imagePath)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.lastname)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.password)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.state)
@@ -62,16 +53,13 @@
         <th>
             @Html.DisplayNameFor(model => model.type)
         </th>
-        <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
+       
         <td>
-            @Html.DisplayFor(modelItem => item.collection.description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.whishlist.id)
+            @Html.DisplayFor(modelItem => item.id)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.role)
@@ -96,9 +84,6 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.lastname)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.password)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.state)

@@ -65,9 +65,21 @@
     <Compile Include="infrastructure\RepositoryBase.cs" />
     <Compile Include="infrastructure\UnitOfWork.cs" />
     <Compile Include="JeeModel.cs" />
-    <Compile Include="Migrations\201711071110284_InitialCreate.cs" />
-    <Compile Include="Migrations\201711071110284_InitialCreate.Designer.cs">
-      <DependentUpon>201711071110284_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201711072330488_v0.cs" />
+    <Compile Include="Migrations\201711072330488_v0.Designer.cs">
+      <DependentUpon>201711072330488_v0.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711080038052_v2.cs" />
+    <Compile Include="Migrations\201711080038052_v2.Designer.cs">
+      <DependentUpon>201711080038052_v2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711080246188_v3.cs" />
+    <Compile Include="Migrations\201711080246188_v3.Designer.cs">
+      <DependentUpon>201711080246188_v3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711080249000_v4.cs" />
+    <Compile Include="Migrations\201711080249000_v4.Designer.cs">
+      <DependentUpon>201711080249000_v4.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -85,8 +97,17 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201711071110284_InitialCreate.resx">
-      <DependentUpon>201711071110284_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201711072330488_v0.resx">
+      <DependentUpon>201711072330488_v0.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711080038052_v2.resx">
+      <DependentUpon>201711080038052_v2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711080246188_v3.resx">
+      <DependentUpon>201711080246188_v3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711080249000_v4.resx">
+      <DependentUpon>201711080249000_v4.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

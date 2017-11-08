@@ -72,6 +72,7 @@
     <Compile Include="entities\schedule.cs" />
     <Compile Include="entities\showroom.cs" />
     <Compile Include="entities\ticket.cs" />
+    <Compile Include="entities\transportJob.cs" />
     <Compile Include="entities\user.cs" />
     <Compile Include="entities\whishlist.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
