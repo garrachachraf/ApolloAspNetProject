@@ -10,7 +10,8 @@ namespace Apollo.Domain.entities
     public class transportJob
     {
         public int id { get; set; }
-        public user tarnsporter { get; set; }
+        public Nullable<int> transporterID { get; set; }
+        public  user transporter { get; set; }
         public orders orders { get; set; }
         public DateTime DateDeDebut { get; set; }
         public DateTime DateDeDefin { get; set; }
@@ -18,6 +19,8 @@ namespace Apollo.Domain.entities
         public String title { get; set; }
         [StringLength(255)]
         public String  description { get; set; }
+        [StringLength(255)]
+        public String Status { get; set; }
 
 
     }

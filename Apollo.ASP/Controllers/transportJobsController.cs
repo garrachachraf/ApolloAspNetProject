@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Services;
 using Apollo.Data;
 using Apollo.Domain.entities;
 
@@ -26,7 +29,8 @@ namespace Apollo.ASP.Controllers
              {
                  return RedirectToAction("Index", "Home");
              }*/
-            return View(db.TransportJobs.ToList());
+            var transOrder = db.TransportJobs.Include(u => u.orders.artwork);
+            return View(transOrder.ToList());
         }
 
         // GET: transportJobs/Details/5
@@ -65,6 +69,58 @@ namespace Apollo.ASP.Controllers
             }
 
             return View(transportJob);
+
+        }
+
+
+
+
+        
+        [HttpPost]
+        public JsonResult AcceptJob(int? id)
+        {
+            int iduser = Convert.ToInt32(Session["user"].ToString());
+
+
+            transportJob transportJob = db.TransportJobs.Find(id);
+            transportJob.Status = "started";
+            transportJob.transporterID = iduser;
+
+            db.TransportJobs.Attach(transportJob);
+
+
+
+
+
+            db.Entry(transportJob).State = EntityState.Modified;
+
+
+            try
+            {
+                db.SaveChanges();
+                // Your code...
+                // Could also be before try if you know the exception occurs in SaveChanges
+
+
+            }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    System.Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        System.Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                            ve.PropertyName, ve.ErrorMessage);
+                    }
+                }
+
+            }
+
+            return  Json(transportJob);
+
+
         }
 
         // GET: transportJobs/Edit/5

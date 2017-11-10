@@ -11,7 +11,7 @@ namespace Apollo.ASP.Controllers
 {
     public class HomeController : Controller
     {
-        private JeeModel db = new JeeModel();
+        
         public ActionResult Index()
         {
             return View();
@@ -32,10 +32,13 @@ namespace Apollo.ASP.Controllers
                 IRestResponse response = client.Execute(request);
                 var code = response.StatusCode;
                 var token = response.Content;
-                string authorizationHeader = response.Headers.ToList()
+            IRestResponse<user> response2 = client.Execute<user>(request);
+            var role = response2.Data.role;
+            string authorizationHeader = response.Headers.ToList()
                     .Find(x => x.Name == "Authorization").Value.ToString();
                 Session["token"] = authorizationHeader;
-                ViewBag.role = token;
+                ViewBag.role = role;
+                Session["user"] = response2.Data.id;
             if (token =="Admin")
             {
                 return RedirectToAction("Index");
@@ -53,18 +56,6 @@ namespace Apollo.ASP.Controllers
 
 
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
+        
     }
 }
