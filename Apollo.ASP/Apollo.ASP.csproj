@@ -138,6 +138,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\artworksController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\NewsLetterOpensController.cs" />
+    <Compile Include="Controllers\NewsLettersController.cs" />
     <Compile Include="Controllers\usersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -196,6 +198,13 @@
     <Content Include="Views\users\Details.cshtml" />
     <Content Include="Views\users\Edit.cshtml" />
     <Content Include="Views\users\Index.cshtml" />
+    <Content Include="Views\NewsLetters\Create.cshtml" />
+    <Content Include="Views\NewsLetters\Delete.cshtml" />
+    <Content Include="Views\NewsLetters\Details.cshtml" />
+    <Content Include="Views\NewsLetters\Edit.cshtml" />
+    <Content Include="Views\NewsLetters\Index.cshtml" />
+    <Content Include="Views\NewsLetters\SendEmails.cshtml" />
+    <Content Include="Views\NewsLetterOpens\Opened.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

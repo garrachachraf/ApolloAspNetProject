@@ -32,12 +32,18 @@ namespace Apollo.Data
         public virtual DbSet<ticket> ticket { get; set; }
         public virtual DbSet<user> user { get; set; }
         public virtual DbSet<whishlist> whishlist { get; set; }
+        public virtual DbSet<NewsLetter> newsletter { get; set; }
+        public virtual DbSet<NewsLettersOpens> newsletteropens { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<NewsLettersOpens>()
+                .Property(e => e.ID);
+                
+
             modelBuilder.Entity<artwork>()
-                .Property(e => e.descreption)
-                .IsUnicode(false);
+                            .Property(e => e.descreption)
+                            .IsUnicode(false);
 
             modelBuilder.Entity<artwork>()
                 .Property(e => e.mediaPath)

@@ -65,9 +65,9 @@
     <Compile Include="infrastructure\RepositoryBase.cs" />
     <Compile Include="infrastructure\UnitOfWork.cs" />
     <Compile Include="JeeModel.cs" />
-    <Compile Include="Migrations\201711071110284_InitialCreate.cs" />
-    <Compile Include="Migrations\201711071110284_InitialCreate.Designer.cs">
-      <DependentUpon>201711071110284_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201711080019291_ach.cs" />
+    <Compile Include="Migrations\201711080019291_ach.Designer.cs">
+      <DependentUpon>201711080019291_ach.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -85,8 +85,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201711071110284_InitialCreate.resx">
-      <DependentUpon>201711071110284_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201711080019291_ach.resx">
+      <DependentUpon>201711080019291_ach.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
