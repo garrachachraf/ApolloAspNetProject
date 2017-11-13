@@ -8,6 +8,7 @@ namespace Apollo.Services
 {
     public interface IMailService
     {
-        void SendThisMail(string to , string subject , string msg);
+        void SendThisMail(string to, string subject, string msg);
+        void SendMailInvoice(string to, string subject, string msg, string path , string filename);
     }
 }

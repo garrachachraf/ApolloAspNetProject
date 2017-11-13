@@ -69,6 +69,26 @@
     <Compile Include="Migrations\201711080019291_ach.Designer.cs">
       <DependentUpon>201711080019291_ach.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711091035009_v6.cs" />
+    <Compile Include="Migrations\201711091035009_v6.Designer.cs">
+      <DependentUpon>201711091035009_v6.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711091043476_v7.cs" />
+    <Compile Include="Migrations\201711091043476_v7.Designer.cs">
+      <DependentUpon>201711091043476_v7.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711091053518_v8.cs" />
+    <Compile Include="Migrations\201711091053518_v8.Designer.cs">
+      <DependentUpon>201711091053518_v8.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711091056004_v9.cs" />
+    <Compile Include="Migrations\201711091056004_v9.Designer.cs">
+      <DependentUpon>201711091056004_v9.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711112211468_AchMayMerge.cs" />
+    <Compile Include="Migrations\201711112211468_AchMayMerge.Designer.cs">
+      <DependentUpon>201711112211468_AchMayMerge.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -87,6 +107,21 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201711080019291_ach.resx">
       <DependentUpon>201711080019291_ach.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711091035009_v6.resx">
+      <DependentUpon>201711091035009_v6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711091043476_v7.resx">
+      <DependentUpon>201711091043476_v7.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711091053518_v8.resx">
+      <DependentUpon>201711091053518_v8.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711091056004_v9.resx">
+      <DependentUpon>201711091056004_v9.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711112211468_AchMayMerge.resx">
+      <DependentUpon>201711112211468_AchMayMerge.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

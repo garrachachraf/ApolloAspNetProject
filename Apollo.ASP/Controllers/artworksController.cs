@@ -19,7 +19,7 @@ namespace Apollo.ASP.Controllers
 
         // GET: artworks
         public ActionResult Index()
-        {
+        {  
             var artwork = ga.FindByCondition();
             return View(artwork.ToList());
         }

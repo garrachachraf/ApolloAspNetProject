@@ -33,8 +33,8 @@ namespace Apollo.Data.Migrations
             //    .Index(t => t.IdNewsletter_Id)
             //    .Index(t => t.IdUser_id);
 
-            AddForeignKey("dbo.NewsLettersOpens", "IdNewsletter_Id", "dbo.NewsLetters", "id");
-            AddForeignKey("dbo.NewsLettersOpens", "IdUser_id", "apollo.user", "id");
+            //AddForeignKey("dbo.NewsLettersOpens", "IdNewsletter_Id", "dbo.NewsLetters", "id");
+            //AddForeignKey("dbo.NewsLettersOpens", "IdUser_id", "apollo.user", "id");
 
         }
         

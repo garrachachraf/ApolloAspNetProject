@@ -20,6 +20,7 @@ namespace Apollo.Data.Infrastructures
         IEnumerable<T> FindByCondition(
             Expression<Func<T, bool>> condition = null,
             Expression<Func<T, bool>> orederby = null);
-
+        IEnumerable<T> QueryObjectGraph(Expression<Func<T, bool>> filter, string children);
     }
+   
 }

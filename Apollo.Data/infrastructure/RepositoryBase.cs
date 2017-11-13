@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -11,6 +12,7 @@ namespace Apollo.Data.Infrastructures
 {
     public class RepositoryBase<T> : IRespositoryBase<T> where T : class
     {
+        protected ObjectSet<T> _objectSet;
         private JeeModel ctx;
         public JeeModel MyContext { get { return ctx; } }
         private DbSet<T> dbset = null;
@@ -19,6 +21,9 @@ namespace Apollo.Data.Infrastructures
             ctx = dbfactory.Mycontext;
             dbset = ctx.Set<T>();
         }
+
+
+        
         public void commit() { MyContext.SaveChanges(); }
         public void Create(T entity)
         {
@@ -85,6 +90,10 @@ namespace Apollo.Data.Infrastructures
                 return dbset.OrderBy(orederby);
             }
             return dbset.Where(condition).OrderBy(orederby);
+        }
+        public IEnumerable<T> QueryObjectGraph(Expression<Func<T, bool>> filter, string children)
+        {
+            return _objectSet.Include(children).Where(filter);
         }
     }
 }

@@ -55,6 +55,8 @@ namespace Apollo.ASP.Controllers
             return View();
         }
         // GET: NewsLetters/Create
+
+        [ValidateInput(false)]
         public ActionResult Create()
         {
             return View();
@@ -65,6 +67,7 @@ namespace Apollo.ASP.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult Create([Bind(Include = "Id,To,Subject,msg,nbrecivers")] NewsLetter newsLetter)
         {
             if (ModelState.IsValid)
