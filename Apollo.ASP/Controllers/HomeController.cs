@@ -47,15 +47,6 @@ namespace Apollo.ASP.Controllers
             return RedirectToAction("Index", "transportJobs"); ;
            
         }
-
-
-
-
-
-
-
-
-
         
     }
 }

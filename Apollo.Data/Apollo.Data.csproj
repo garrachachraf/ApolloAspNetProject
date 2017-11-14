@@ -65,21 +65,9 @@
     <Compile Include="infrastructure\RepositoryBase.cs" />
     <Compile Include="infrastructure\UnitOfWork.cs" />
     <Compile Include="JeeModel.cs" />
-    <Compile Include="Migrations\201711091035009_v6.cs" />
-    <Compile Include="Migrations\201711091035009_v6.Designer.cs">
-      <DependentUpon>201711091035009_v6.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711091043476_v7.cs" />
-    <Compile Include="Migrations\201711091043476_v7.Designer.cs">
-      <DependentUpon>201711091043476_v7.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711091053518_v8.cs" />
-    <Compile Include="Migrations\201711091053518_v8.Designer.cs">
-      <DependentUpon>201711091053518_v8.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711091056004_v9.cs" />
-    <Compile Include="Migrations\201711091056004_v9.Designer.cs">
-      <DependentUpon>201711091056004_v9.cs</DependentUpon>
+    <Compile Include="Migrations\201711130137042_sdsd.cs" />
+    <Compile Include="Migrations\201711130137042_sdsd.Designer.cs">
+      <DependentUpon>201711130137042_sdsd.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -97,17 +85,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201711091035009_v6.resx">
-      <DependentUpon>201711091035009_v6.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711091043476_v7.resx">
-      <DependentUpon>201711091043476_v7.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711091053518_v8.resx">
-      <DependentUpon>201711091053518_v8.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711091056004_v9.resx">
-      <DependentUpon>201711091056004_v9.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201711130137042_sdsd.resx">
+      <DependentUpon>201711130137042_sdsd.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
