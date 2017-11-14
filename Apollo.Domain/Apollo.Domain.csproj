@@ -84,6 +84,8 @@
     <Compile Include="entities\follow.cs" />
     <Compile Include="entities\gallery.cs" />
     <Compile Include="entities\media.cs" />
+    <Compile Include="entities\NewsLetter.cs" />
+    <Compile Include="entities\NewsLettersOpens.cs" />
     <Compile Include="entities\notification.cs" />
     <Compile Include="entities\orders.cs" />
     <Compile Include="entities\rating.cs" />

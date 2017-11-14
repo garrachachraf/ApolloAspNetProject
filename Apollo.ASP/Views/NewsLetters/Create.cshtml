@@ -1,0 +1,108 @@
+﻿@model Apollo.Domain.entities.NewsLetter
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout_2.cshtml";
+}
+
+
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-lg-9 animated fadeInRight">
+            <div class="mail-box-header">
+                <div class="pull-right tooltip-demo">
+                    <a href="@Url.Action("Back to List", "Index")" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Move to draft folder"><i class="fa fa-pencil"></i> Draft</a>
+                    <a href="@Url.Action("Inbox", "Index")" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Discard email"><i class="fa fa-times"></i> Discard</a>
+                </div>
+                <h2>
+                    Compse mail
+                </h2>
+            </div>
+            <div class="mail-box">
+
+
+                <div class="mail-body">
+
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+                       
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.To, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                <select name="TO" id="TO" class="form-control">
+                                    <option value="ALL">ALL</option>
+                                    <option value="USERS">USERS</option>
+                                    <option value="GO">Gallery Owners</option>
+                                    <option value="Artists">Artists</option>
+                                </select>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Subject, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Subject, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.msg, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                <textarea  id="msg" name="msg" class="summernote"></textarea>
+                                
+                            </div>
+                        </div>
+                        <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Create" class="btn btn-default" />
+                                </div>
+                            </div>
+
+                    }
+                </div>
+                <div class="mail-text h-200">
+
+                  <!-- <div class="summernote">
+                        <h3>Hello Jonathan! </h3>
+                        dummy text of the printing and typesetting industry. <strong>Lorem Ipsum has been the industry's</strong> standard dummy text ever since the 1500s,
+                        when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic
+                        typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with
+                        <br />
+                        <br />
+
+                    </div>
+                    -->
+                    <div class="clearfix"></div>
+                </div>
+                <div class="mail-body text-right tooltip-demo">
+                    <a href="@Url.Action("Inbox", "Mailbox")" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="Send"><i class="fa fa-reply"></i> Send</a>
+                    <a href="@Url.Action("Inbox", "Mailbox")" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Discard email"><i class="fa fa-times"></i> Discard</a>
+                    <a href="@Url.Action("Inbox", "Mailbox")" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Move to draft folder"><i class="fa fa-pencil"></i> Draft</a>
+                </div>
+                <div class="clearfix"></div>
+             </div>  
+
+
+        
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    @Styles.Render("~/plugins/summernoteStyles")
+}
+
+@section Scripts {
+    @Scripts.Render("~/plugins/summernote")
+
+<script type="text/javascript">
+        $(document).ready(function () {
+
+            $('.summernote').summernote();
+
+        });
+
+</script>
+}
+

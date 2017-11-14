@@ -30,8 +30,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    <Reference Include="RestSharp, Version=106.0.0.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.106.0.0\lib\net452\RestSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -43,6 +50,12 @@
     <Compile Include="Class1.cs" />
     <Compile Include="GestionArtWork.cs" />
     <Compile Include="IGestionArtWork.cs" />
+    <Compile Include="IMailService.cs" />
+    <Compile Include="INewsLetterOpensService.cs" />
+    <Compile Include="INewsLetterService.cs" />
+    <Compile Include="MailService.cs" />
+    <Compile Include="NewsLetterService.cs" />
+    <Compile Include="NewsLettersOpensService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -58,6 +71,9 @@
       <Project>{24f74f5e-ac11-454e-bff1-841a0b8a9c9b}</Project>
       <Name>Apollo.ServicePattern</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

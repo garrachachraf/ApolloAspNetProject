@@ -1,0 +1,58 @@
+﻿@model Apollo.Domain.entities.NewsLetter
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>NewsLetter</h4>
+    <hr />
+    @Html.ActionLink("SendEmails", "SendEmails", new { id = Model.Id }) |
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.To)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.To)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Subject)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Subject)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.msg)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.msg)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nbrecivers)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nbrecivers)
+        </dd>
+        
+        <dt>
+            opens :
+        </dt>
+        <dd>
+            @ViewBag.views
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
