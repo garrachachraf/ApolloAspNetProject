@@ -80,10 +80,12 @@
     <Compile Include="Class1.cs" />
     <Compile Include="entities\artwork.cs" />
     <Compile Include="entities\collection.cs" />
+    <Compile Include="entities\Conversation.cs" />
     <Compile Include="entities\event.cs" />
     <Compile Include="entities\follow.cs" />
     <Compile Include="entities\gallery.cs" />
     <Compile Include="entities\media.cs" />
+    <Compile Include="entities\Message.cs" />
     <Compile Include="entities\NewsLetter.cs" />
     <Compile Include="entities\NewsLettersOpens.cs" />
     <Compile Include="entities\notification.cs" />

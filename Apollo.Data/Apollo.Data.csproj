@@ -89,6 +89,18 @@
     <Compile Include="Migrations\201711112211468_AchMayMerge.Designer.cs">
       <DependentUpon>201711112211468_AchMayMerge.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711131404099_amriv1.cs" />
+    <Compile Include="Migrations\201711131404099_amriv1.Designer.cs">
+      <DependentUpon>201711131404099_amriv1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711131412313_amriv2.cs" />
+    <Compile Include="Migrations\201711131412313_amriv2.Designer.cs">
+      <DependentUpon>201711131412313_amriv2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711141358572_amri04v3.cs" />
+    <Compile Include="Migrations\201711141358572_amri04v3.Designer.cs">
+      <DependentUpon>201711141358572_amri04v3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -122,6 +134,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711112211468_AchMayMerge.resx">
       <DependentUpon>201711112211468_AchMayMerge.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711131404099_amriv1.resx">
+      <DependentUpon>201711131404099_amriv1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711131412313_amriv2.resx">
+      <DependentUpon>201711131412313_amriv2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711141358572_amri04v3.resx">
+      <DependentUpon>201711141358572_amri04v3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

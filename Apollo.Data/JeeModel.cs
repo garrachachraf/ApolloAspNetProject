@@ -15,7 +15,9 @@ namespace Apollo.Data
         public JeeModel()
             : base("name=JeeModel")
         {
-           // Database.SetInitializer<JeeModel>(new jeeModelContextInitialize());
+            this.Configuration.LazyLoadingEnabled = false;
+            this.Configuration.ProxyCreationEnabled = false;
+            // Database.SetInitializer<JeeModel>(new jeeModelContextInitialize());
         }
 
         public virtual DbSet<artwork> artwork { get; set; }
@@ -35,6 +37,8 @@ namespace Apollo.Data
         public virtual DbSet<NewsLetter> newsletter { get; set; }
         public virtual DbSet<NewsLettersOpens> newsletteropens { get; set; }
         public virtual DbSet<transportJob> TransportJobs { get; set; }
+        public virtual DbSet<Conversation> conversations { get; set; }
+        public virtual DbSet<Message> messages { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<NewsLettersOpens>()

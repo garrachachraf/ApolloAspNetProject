@@ -1,0 +1,85 @@
+﻿@model Apollo.Domain.entities.Conversation
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout_2.cshtml";
+}
+<div>
+    <div class="wrapper wrapper-content">
+        <div class="row">
+            <div class="page-header">
+                <h1 class="text-center"><i class="fa fa-envelope"></i> Customer Messages </h1>
+            </div>
+            <div class="col-lg-offset-1 col-lg-9 animated fadeInRight">
+                <div class="mail-box-header">
+                    <div class="pull-right tooltip-demo">
+                        <a href="mail_compose.html" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Reply"><i class="fa fa-reply"></i> Reply</a>
+                        <a onclick="window.print()" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Print email"><i class="fa fa-print"></i> </a>
+                        <a href="mailbox.html" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Move to trash"><i class="fa fa-trash-o"></i> </a>
+                    </div>
+                    <h2>
+                        <span class="font-normal" style="color:#1AB394">Subject: </span>@Html.DisplayFor(model => model.Object)
+                    </h2>
+                    <div class="mail-tools tooltip-demo m-t-md">
+                        <h3>
+                            <span class="font-normal">From: </span>@Html.DisplayFor(model => model.Client.userName)
+                        </h3>
+                    </div>
+                </div>
+                    @foreach (var item in Model.Messages)
+                    {
+                            if (item.SenderID == (int)@Session["user"])
+                            {
+                            @:    <div class="mail-box pull-right" style="background-color:#1ab394;color:white;width:66%">
+                                }
+                                else
+                                {
+                                @:     <div class="mail-box">
+                                    }
+                        <div class="mail-body">
+                            @Html.DisplayFor(model => item.Content)
+                        </div>
+                        <div class="mail-body text-right tooltip-demo">
+                            <span class="label label-danger">@Html.DisplayFor(model => item.date)</span>
+                        </div>
+                 @:   </div>
+                <div class="clearfix"></div>
+
+                    }
+
+                                      <div class="row" style="background-color:white">
+                                          <h2 class="col-md-2">
+                                              Reply
+                                          </h2>
+                                          <div>
+                                              <div class="mail-text">
+                                                  <textarea style="width:100%" rows="8" id="mytextarea"></textarea>
+
+                                                  <div class="mail-body text-right tooltip-demo">
+                                                      <a id="sendButton" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Send"><i class="fa fa-reply"></i> Send</a>
+                                                      <a class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="" data-original-title="Discard email"><i class="fa fa-times"></i> Discard</a>
+                                                      <a class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="" data-original-title="Move to draft folder"><i class="fa fa-pencil"></i> Draft</a>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+            </div>
+        </div>
+    </div>
+<script src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.2.js" type="text/javascript"></script>
+<script>
+
+    $(document).ready(function () {
+        $("#sendButton").click(function () {
+            $.post("/api/messages",
+            {
+                content:$('#mytextarea').val(),
+                SenderId: @Session["user"],
+                ConversationId :  @Html.DisplayFor(model => model.Id),
+            },
+            function (data, status) {
+                location.reload();
+            });
+        });
+    });
+</script>

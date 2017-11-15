@@ -1,0 +1,48 @@
+﻿@model Apollo.Domain.entities.Conversation
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Conversation</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Admin.role)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Admin.role)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Client.role)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Client.role)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Object)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Object)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
