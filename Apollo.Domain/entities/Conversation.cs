@@ -15,5 +15,6 @@ namespace Apollo.Domain.entities
         public user Admin { get; set; }
         public string Object { get; set; }
         public virtual ICollection<Message> Messages { get; set; }
+        public bool IsSeen { get; set; }
     }
 }

@@ -39,7 +39,7 @@ namespace Apollo.ASP.Controllers
             dynamic data = j.Deserialize(token, typeof(object));
             System.Diagnostics.Debug.WriteLine(token);
             Session["currentUser"] = "";
-            if (data["role"] == "Admin" || data["role"] == "Artist")
+            if (data["role"] == "Admin")
             {
                 var role = response2.Data.role;
                 ViewBag.role = role;

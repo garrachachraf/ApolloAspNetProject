@@ -15,5 +15,6 @@ namespace Apollo.Domain.entities
         public Nullable<int> ConversationID { get; set; }
         public virtual Conversation Conversation { get; set; }
         public String Content { get; set; }
+        public bool seen { get; set; }
     }
 }

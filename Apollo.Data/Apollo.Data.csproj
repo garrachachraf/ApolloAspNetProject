@@ -101,6 +101,14 @@
     <Compile Include="Migrations\201711141358572_amri04v3.Designer.cs">
       <DependentUpon>201711141358572_amri04v3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711151328419_amriv5.cs" />
+    <Compile Include="Migrations\201711151328419_amriv5.Designer.cs">
+      <DependentUpon>201711151328419_amriv5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711151337070_amriv6.cs" />
+    <Compile Include="Migrations\201711151337070_amriv6.Designer.cs">
+      <DependentUpon>201711151337070_amriv6.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -143,6 +151,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711141358572_amri04v3.resx">
       <DependentUpon>201711141358572_amri04v3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711151328419_amriv5.resx">
+      <DependentUpon>201711151328419_amriv5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711151337070_amriv6.resx">
+      <DependentUpon>201711151337070_amriv6.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

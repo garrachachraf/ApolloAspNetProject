@@ -14,7 +14,6 @@ namespace Apollo.Services
     {
         public static void sendPushNotif(string message, string tagKey ,string tagValue)
         {
-
             var request = WebRequest.Create("https://onesignal.com/api/v1/notifications") as HttpWebRequest;
 
             request.KeepAlive = true;

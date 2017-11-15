@@ -9,17 +9,26 @@ using System.Web.Mvc;
 using Apollo.Data;
 using Apollo.Domain.entities;
 using System.Web.Script.Serialization;
+using Apollo.Services;
 
 namespace Apollo.ASP.Controllers
 {
     public class ConversationsController : Controller
     {
         private JeeModel db = new JeeModel();
+        GestionConversation gc = new GestionConversation();
 
         // GET: Conversations
-        public ActionResult Index()
+        public ActionResult Index(string search)
         {
-            var conversations = db.conversations.Include(c => c.Admin).Include(c => c.Client).Include(m => m.Messages);
+            IEnumerable<Conversation> conversations;
+            conversations = db.conversations.Include(c => c.Admin).Include(c => c.Client).Include(m => m.Messages);
+            if (search != null)
+            {
+                conversations =conversations.ToList().FindAll(x => x.Object.Contains(search));
+            }
+            ViewBag.nbrOfConversations = conversations.Count();
+            ViewBag.gc = gc;
             return View(conversations.ToList());
         }
         // GET: Conversations
@@ -41,6 +50,8 @@ namespace Apollo.ASP.Controllers
             {
                 return HttpNotFound();
             }
+            conversation.IsSeen = true;
+            db.SaveChanges();
             return View(conversation);
         }
 

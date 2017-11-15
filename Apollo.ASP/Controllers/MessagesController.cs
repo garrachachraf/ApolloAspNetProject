@@ -80,11 +80,18 @@ namespace Apollo.ASP.Controllers
             {
                 return BadRequest(ModelState);
             }
+            GestionMessage gm = new GestionMessage();
+            GestionConversation gc = new GestionConversation();
             message.date = DateTime.Now;
-            db.messages.Add(message);
-            db.SaveChanges();
+            //db.messages.Add(message);
+            gm.Create(message);
+            gm.Commit();
+            Conversation c = gc.FindById(message.ConversationID.Value);
+            c.IsSeen = false;
+            gc.Update(c);
+            gc.Commit();
             user u =db.user.Find(message.SenderID);
-            if(u.role == "Admin") // =! admin TODO
+            if(u.role != "Admin") // =! admin TODO
             {
                 CommonTools.sendPushNotif(u.userName + " : " + message.Content, "role", "Admin");
             }
