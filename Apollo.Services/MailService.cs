@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -49,5 +51,21 @@ namespace Apollo.Services
             request.Method = Method.POST;
             client.Execute(request);
         }
+        public void SendMail(string to, string subject, string msg, string path, string filename, byte[] applicationPDFData)
+        {
+            MemoryStream stream = new MemoryStream(applicationPDFData);
+            MailMessage o = new MailMessage("ayed.maissen@gmail.com", "ayed.maissen@gmail.com");
+            o.BodyEncoding = Encoding.UTF8;
+            o.IsBodyHtml = true;
+            o.Subject = "Sending Email Using Asp.Net & C#";
+            Attachment attachment = new Attachment(stream, "document.pdf");
+            o.Attachments.Add(attachment);
+            NetworkCredential netCred = new NetworkCredential("ayed.maissen@gmail.com", "maissenayedbrifry");
+            SmtpClient smtpobj = new SmtpClient("smtp.gmail.com", 587);
+            smtpobj.EnableSsl = true;
+            smtpobj.Credentials = netCred;
+            smtpobj.Send(o);
+        }
+
     }
 }

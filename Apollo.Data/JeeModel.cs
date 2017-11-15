@@ -15,7 +15,9 @@ namespace Apollo.Data
         public JeeModel()
             : base("name=JeeModel")
         {
-           // Database.SetInitializer<JeeModel>(new jeeModelContextInitialize());
+            // Database.SetInitializer<JeeModel>(new jeeModelContextInitialize());
+            this.Configuration.LazyLoadingEnabled = false;
+            this.Configuration.ProxyCreationEnabled = false;
         }
 
         public virtual DbSet<artwork> artwork { get; set; }

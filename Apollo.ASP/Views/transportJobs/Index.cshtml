@@ -7,7 +7,7 @@
 }
 
 
-<!--Html.Partial("~/Views/SessionControle.cshtml")-->
+@Html.Partial("~/Views/SessionControle.cshtml")
 <link href="~/Content/dataTables.bootstrap4.css" rel="stylesheet">
 
 
@@ -349,14 +349,15 @@
             dataType: "json",
             success: function (response) {
                 console.log(response.id);
-                var val = response.DateDeDedebut;
+                var val = response.DateDeDebut;
                 function ToJavaScriptDate(value) {
                     var pattern = /Date\(([^)]+)\)/;
                     var results = pattern.exec(value);
+                    console.log(results);
                     var dt = new Date(parseFloat(results[1]));
                     return (dt.getMonth() + 1) + "/" + dt.getDate() + "/" + dt.getFullYear() + " " + dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getMilliseconds();
                 }
-                $('#' + item + " .DateDeDeDebut").empty().append(ToJavaScriptDate(val)/*value = new Date(parseInt(value.replace("/Date(", "").replace(")/",""), 10))*/);
+                $('#' + item + " .DateDeDebut").empty().append(ToJavaScriptDate(val)/*value = new Date(parseInt(value.replace("/Date(", "").replace(")/",""), 10))*/);
 
                 //$('#' + item).empty().append(response.Status);
                 $('#' + item + " .status").empty().append('<span class="label label-success">' + response.Status + '</span>');
@@ -396,7 +397,7 @@
                 }
                 var link = '@Html.ActionLink("Print", "HtmlToPdf", "transportJobs",  new { id = "_applicantId_" })';
                 link = link.replace('_applicantId_', item);
-                $('#' + item + " .DateDeDefin").empty().append(ToJavaScriptDate(val)/*value = new Date(parseInt(value.replace("/Date(", "").replace(")/",""), 10))*/);
+                $('#' + item + " .DateDefin").empty().append(ToJavaScriptDate(val)/*value = new Date(parseInt(value.replace("/Date(", "").replace(")/",""), 10))*/);
 
                 $('#' + item + " .status").empty().append('<span class="label label-success">' + response.Status + '</span>');
                 $('#' + item + " .action").empty().append(
