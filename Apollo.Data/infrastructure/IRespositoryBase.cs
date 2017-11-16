@@ -12,6 +12,7 @@ namespace Apollo.Data.Infrastructures
         void remove(T entity);
         T FindById(int id);
         T FindById(String id);
+        T FindById(int? id);
         void Update(T entity);
         //IEnumerable<T> FindAll();
         //n'est pas nesscaire parque on find by condtion fait l'affaire ila condtion null
@@ -20,7 +21,7 @@ namespace Apollo.Data.Infrastructures
         IEnumerable<T> FindByCondition(
             Expression<Func<T, bool>> condition = null,
             Expression<Func<T, bool>> orederby = null);
-        IEnumerable<T> QueryObjectGraph(Expression<Func<T, bool>> filter, string children);
+        IQueryable<T> QueryObjectGraph(Expression<Func<T, object>> filter);
     }
    
 }

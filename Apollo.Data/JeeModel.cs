@@ -43,7 +43,7 @@ namespace Apollo.Data
         {
             modelBuilder.Entity<NewsLettersOpens>()
                 .Property(e => e.ID);
-                
+
 
             modelBuilder.Entity<artwork>()
                             .Property(e => e.descreption)

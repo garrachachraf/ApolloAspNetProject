@@ -7,7 +7,7 @@
 }
 
 
-<!--Html.Partial("~/Views/SessionControle.cshtml")-->
+@Html.Partial("~/Views/SessionControle.cshtml")
 <link href="~/Content/dataTables.bootstrap4.css" rel="stylesheet">
 
 
@@ -71,47 +71,88 @@
 
                         <tbody>
                             @foreach (var item in Model)
-            {
-                                <tr>
-                                    <td>
+                                          {
+                                <tr id="@Html.DisplayFor(modelItem => item.id)">
+                                    <td class="title">
                                         @Html.DisplayFor(modelItem => item.title)
                                     </td>
-                                    <td>
+                                    <td class="descreption">
                                         @Html.DisplayFor(modelItem => item.description)
                                     </td>
 
-                                    <td>
+                                    <td class="DateDeDebut">
                                         @Html.DisplayFor(modelItem => item.DateDeDebut)
                                     </td>
-                                    <td>
+                                    <td class="DateDeDefin">
                                         @Html.DisplayFor(modelItem => item.DateDeDefin)
                                     </td>
 
-                                    <td>
+                                    <td class="artwork">
                                         @foreach (var artwork in item.orders.artwork)
                                         {
                                             @Html.DisplayFor(modelItem => artwork.title)
 
                                         }
                                     </td>
-                                    <td id="@Html.DisplayFor(modelItem => item.id)">@Html.DisplayFor(modelItem => item.Status)</td>
-                                    <td>
+                                    <td class="status">
+                                        @{
+                                            String stus = Html.DisplayFor(modelItem => item.Status).ToString();
 
 
-                                        <button onclick="AcceptJob(@Html.DisplayFor(modelItem => item.id))">
-                                            yo
+                                            if (stus == "")
+                                            {
+                                                <span class="label label-failed">NOT TAKEN</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="label label-success"> @Html.DisplayFor(modelItem => item.Status) </span>
 
-                                        </button>
+                                            }
+                                        }
+
 
 
                                     </td>
-                                </tr>
-                            }
+                                    <td class="action">
+                                        @{
+                                            String stusUS = Html.DisplayFor(modelItem => item.Status).ToString();
 
+
+                                            if (stus == "Started")
+                                            {
+                                                <button class="btn btn-success" onclick="CompletedJob(@Html.DisplayFor(modelItem => item.id))">complete job</button>
+                                            }
+                                            else if (stus == "Completed")
+                                            {
+                                                <div class="btn-group">
+                                                    <button data-toggle="dropdown" class="btn btn-warning dropdown-toggle" aria-expanded="false">Action <span class="caret"></span></button>
+                                                    <ul class="dropdown-menu">
+                                                        <li><a href="#" data-toggle="modal" data-target="#myModal">Gnerate Invoice</a></li>
+                                                        <li>@Html.ActionLink("Print", "HtmlToPdf", "transportJobs", new {id = item.id}, null)
+                                                        </li>
+
+                                                    </ul>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <button class="btn btn-w-m btn-primary" onclick="AcceptJob(@Html.DisplayFor(modelItem => item.id))">
+                                                    Accept job
+                                                </button>
+                                            }
+
+                                        }
+                                 
+
+                                    </td>
+                                              
+                                </tr>
+                                        }
+                              
                         </tbody>
 
                     </table>
-                    <div id="yo"></div>
+                    
                 </div>
             </div>
         </div>
@@ -119,6 +160,130 @@
 
 </div>
 
+<div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content animated bounceInRight">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <i class="fa fa-laptop modal-icon"></i>
+                <h4 class="modal-title">Modal title</h4>
+                <small class="font-bold">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</small>
+            </div>
+            <div class="modal-body">
+             
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="wrapper wrapper-content animated fadeInRight">
+                            <div class="ibox-content p-xl">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <h5>From:</h5>
+                                        <address>
+                                            <strong>Apolo, Inc.</strong><br>
+                                            106 Jorg Avenu, 600/10<br>
+                                            Chicago, VT 32456<br>
+                                            <abbr title="Phone">P:</abbr> (123) 601-4590
+                                        </address>
+                                    </div>
+
+                                    <div class="col-sm-6 text-right">
+                                        <h4>Invoice No.</h4>
+                                        <h4 class="text-navy">INV-000567F7-00</h4>
+                                        <span>To:</span>
+                                        <address>
+                                            <strong>Corporate, Inc.</strong><br>
+                                            112 Street Avenu, 1080<br>
+                                            Miami, CT 445611<br>
+                                            <abbr title="Phone">P:</abbr> (120) 9000-4321
+                                        </address>
+                                        <p>
+                                            <span><strong>Invoice Date:</strong> Marh 18, 2014</span><br />
+                                            <span><strong>Due Date:</strong> March 24, 2014</span>
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="table-responsive m-t">
+                                    <table class="table invoice-table">
+                                        <thead>
+                                        <tr>
+                                            <th>Item List</th>
+                                            <th>Quantity</th>
+                                            <th>Unit Price</th>
+                                            <th>Tax</th>
+                                            <th>Total Price</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>
+                                                <div><strong>Admin Theme with psd project layouts</strong></div>
+                                                <small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</small>
+                                            </td>
+                                            <td>1</td>
+                                            <td>$26.00</td>
+                                            <td>$5.98</td>
+                                            <td>$31,98</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div><strong>Wodpress Them customization</strong></div>
+                                                <small>
+                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                                    Eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                                </small>
+                                            </td>
+                                            <td>2</td>
+                                            <td>$80.00</td>
+                                            <td>$36.80</td>
+                                            <td>$196.80</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div><strong>Angular JS & Node JS Application</strong></div>
+                                                <small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</small>
+                                            </td>
+                                            <td>3</td>
+                                            <td>$420.00</td>
+                                            <td>$193.20</td>
+                                            <td>$1033.20</td>
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div><!-- /table-responsive -->
+
+                                <table class="table invoice-total">
+                                    <tbody>
+                                    <tr>
+                                        <td><strong>Sub Total :</strong></td>
+                                        <td>$1026.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>TAX :</strong></td>
+                                        <td>$235.98</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>TOTAL :</strong></td>
+                                        <td>$1261.98</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                             
+
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+              
+                <button onclick="print()" target="_blank" class="btn btn-primary"><i class="fa fa-print"></i> Print Invoice </button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 @section Styles {
@@ -170,7 +335,7 @@
 }
 
 <script type="text/javascript">
-
+    function print() { window.print(); }
 
 
 
@@ -184,19 +349,74 @@
             dataType: "json",
             success: function (response) {
                 console.log(response.id);
-                $('#'+item).append(response.Status);
+                var val = response.DateDeDebut;
+                function ToJavaScriptDate(value) {
+                    var pattern = /Date\(([^)]+)\)/;
+                    var results = pattern.exec(value);
+                    console.log(results);
+                    var dt = new Date(parseFloat(results[1]));
+                    return (dt.getMonth() + 1) + "/" + dt.getDate() + "/" + dt.getFullYear() + " " + dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getMilliseconds();
+                }
+                $('#' + item + " .DateDeDebut").empty().append(ToJavaScriptDate(val)/*value = new Date(parseInt(value.replace("/Date(", "").replace(")/",""), 10))*/);
+
+                //$('#' + item).empty().append(response.Status);
+                $('#' + item + " .status").empty().append('<span class="label label-success">' + response.Status + '</span>');
+                /* $('#' + item + " .action").empty().append(
+                     ' <div class="btn-group">'+
+                            ' <button data-toggle="dropdown" class="btn btn-warning dropdown-toggle" aria-expanded="false">Action <span class="caret"></span></button>'+
+                             '<ul class="dropdown-menu">'+
+                                ' <li><a href="#">Action</a></li>'+
+                                 '<li><a href="#">Another action</a></li>'+
+                                 '<li><a href="#">Something else here</a></li>'+
+                                 '<li class="divider"></li>'+
+                                 '<li><a href="#">Separated link</a></li>'+
+                             '</ul></div>');*/
+                $('#' + item + " .action").empty().append('<button class="btn btn-success"onclick="CompletedJob(' + item + ')">complete job</button>');
+                console.log(item);
             },
             failure: function (response) {
-              
+
             }
         });
-
-
     }
-    function OnSuccess(response) {
+    function CompletedJob(item) {
+        $.ajax({
+            type: "POST",
+            url: "transportJobs/CompleteJob",
+            data: "{ id: '" + item + "'}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                console.log(response.id);
+                var val = response.DateDeDefin;
+                function ToJavaScriptDate(value) {
+                    var pattern = /Date\(([^)]+)\)/;
+                    var results = pattern.exec(value);
+                    var dt = new Date(parseFloat(results[1]));
+                    return (dt.getMonth() + 1) + "/" + dt.getDate() + "/" + dt.getFullYear()+" "+dt.getHours()+":"+dt.getMinutes()+":"+dt.getMilliseconds();
+                }
+                var link = '@Html.ActionLink("Print", "HtmlToPdf", "transportJobs",  new { id = "_applicantId_" })';
+                link = link.replace('_applicantId_', item);
+                $('#' + item + " .DateDefin").empty().append(ToJavaScriptDate(val)/*value = new Date(parseInt(value.replace("/Date(", "").replace(")/",""), 10))*/);
 
-        console.log(response);
-       
-        window.location.reload();
+                $('#' + item + " .status").empty().append('<span class="label label-success">' + response.Status + '</span>');
+                $('#' + item + " .action").empty().append(
+                     ' <div class="btn-group">' +
+                            ' <button data-toggle="dropdown" class="btn btn-warning dropdown-toggle" aria-expanded="false">Action <span class="caret"></span></button>' +
+                             '<ul class="dropdown-menu">' +
+                                ' <li><a href="#">Action</a></li>' +
+                                 '<li><a href="#">Another action</a></li>' +
+                                 '<li><a href="#">Something else here</a></li>' +
+                                 '<li class="divider"></li>' +
+                                 '<li><a href="#">Separated link</a></li>' +
+                             '</ul></div>');
+               
+                console.log(item);
+            },
+            failure: function (response) {
+
+            }
+        });
+        console.log(item);
     }
 </script>

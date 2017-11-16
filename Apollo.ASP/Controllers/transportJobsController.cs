@@ -6,17 +6,25 @@ using System.Data.Entity.Validation;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Mail;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Services;
 using Apollo.Data;
 using Apollo.Domain.entities;
+using Rotativa;
+using Rotativa.Options;
+using Apollo.Services;
+using Newtonsoft.Json;
 
 namespace Apollo.ASP.Controllers
 {
     public class transportJobsController : Controller
     {
         private JeeModel db = new JeeModel();
+        private ITransporterService transportService = new TransporterService();
+        private MailService mail =new MailService();
 
         // GET: transportJobs
         public ActionResult Index()
@@ -28,9 +36,14 @@ namespace Apollo.ASP.Controllers
              else
              {
                  return RedirectToAction("Index", "Home");
+
              }*/
-            var transOrder = db.TransportJobs.Include(u => u.orders.artwork);
-            return View(transOrder.ToList());
+             
+            var Order = db.orders.AsEnumerable();
+            var job= transportService.GetallArtWork();
+            //var transOrder = db.TransportJobs.Include(u => u.orders.artwork);
+          //  ViewBag.transid = transOrder.ToList();
+            return View(job.ToList());
         }
 
         // GET: transportJobs/Details/5
@@ -75,53 +88,217 @@ namespace Apollo.ASP.Controllers
 
 
 
-        
+
         [HttpPost]
-        public JsonResult AcceptJob(int? id)
+        public JsonResult AcceptJob(int id)
         {
             int iduser = Convert.ToInt32(Session["user"].ToString());
-
-
-            transportJob transportJob = db.TransportJobs.Find(id);
-            transportJob.Status = "started";
+            transportJob transportJob = transportService.FindById(id);
+            if (transportJob == null) throw new ArgumentNullException(nameof(transportJob));
+            // transportJob transportJob = db.TransportJobs.Find(id);
+            transportJob.Status = "Started";
+            transportJob.DateDeDebut = DateTime.Now;
             transportJob.transporterID = iduser;
+            transportService.Update(transportJob);
+            // db.TransportJobs.Attach(transportJob);
+            //db.Entry(transportJob).State = EntityState.Modified;
 
-            db.TransportJobs.Attach(transportJob);
-
-
-
-
-
-            db.Entry(transportJob).State = EntityState.Modified;
-
-
-            try
-            {
-                db.SaveChanges();
-                // Your code...
-                // Could also be before try if you know the exception occurs in SaveChanges
+            /*  try
+              {
+                  db.SaveChanges();
+                  // Your code...
+                  // Could also be before try if you know the exception occurs in SaveChanges
 
 
-            }
-            catch (DbEntityValidationException e)
-            {
-                foreach (var eve in e.EntityValidationErrors)
-                {
-                    System.Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
-                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
-                    foreach (var ve in eve.ValidationErrors)
-                    {
-                        System.Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
-                            ve.PropertyName, ve.ErrorMessage);
-                    }
-                }
+              }
+              catch (DbEntityValidationException e)
+              {
+                  foreach (var eve in e.EntityValidationErrors)
+                  {
+                      System.Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                          eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                      foreach (var ve in eve.ValidationErrors)
+                      {
+                          System.Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                              ve.PropertyName, ve.ErrorMessage);
+                      }
+                  }
 
-            }
-
-            return  Json(transportJob);
+              }*/
+     
+            return Json(new {transportJob.id,transportJob.Status,transportJob.DateDeDebut});
 
 
         }
+
+        [HttpPost]
+        public JsonResult CompleteJob(int id)
+        {
+            int iduser = Convert.ToInt32(Session["user"].ToString());
+            transportJob transportJob = transportService.FindById(id);
+            //transportJob transportJob = db.TransportJobs.Find(id);
+            if (transportJob.transporterID == iduser)
+            {
+                transportJob.Status = "Completed";
+                transportJob.DateDeDefin= DateTime.Now;
+
+                /* db.TransportJobs.Attach(transportJob);
+                 db.Entry(transportJob).State = EntityState.Modified;
+                 try
+                 {
+                     db.SaveChanges();
+                     // Your code...
+                     // Could also be before try if you know the exception occurs in SaveChanges
+                 }
+                 catch (DbEntityValidationException e)
+                 {
+                     foreach (var eve in e.EntityValidationErrors)
+                     {
+                         System.Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                             eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                         foreach (var ve in eve.ValidationErrors)
+                         {
+                             System.Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                                 ve.PropertyName, ve.ErrorMessage);
+                         }
+                     }
+
+                 }
+                 */
+                transportService.Update(transportJob);
+            }
+            return Json(new { transportJob.id, transportJob.Status, transportJob.DateDeDefin }); ;
+        }
+
+
+        
+        public ActionResult HtmlToPdf(int id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            db.Configuration.LazyLoadingEnabled = true;
+            //transportJob transportJob = db.TransportJobs.Find(id);
+            transportJob transportJob = transportService.FindById(id);
+            if (transportJob == null)
+            {
+                return HttpNotFound();
+            }
+            db.Configuration.LazyLoadingEnabled = true;
+            //transportJob transportJob = db.TransportJobs.Find(id);
+           
+            var yo = transportJob;
+            /* var balance = (from a in db.TransportJobs
+                            join c in db.orders on a.orders equals c.Id
+                            where c.ClientID == yourDescriptionObject.ClientID
+                            select a.Balance)
+               .SingleOrDefault();*/
+          
+            var fileName = yo.title;
+            var filePath = Path.Combine(Server.MapPath("/Temp"), fileName);
+
+            var myPDF = new ViewAsPdf("InvoicePrint",yo)
+            {
+                FileName = fileName,
+                PageSize = Size.A5,
+                SaveOnServerPath = filePath
+            };
+
+
+            byte[] applicationPDFData = myPDF.BuildPdf(ControllerContext);
+            mail.SendMail("","","","","",applicationPDFData);
+
+
+
+
+
+
+            return new ViewAsPdf("InvoicePrint", yo);
+
+        }
+
+
+
+
+        public ActionResult MonthlyInvoice()
+        {
+            db.Configuration.LazyLoadingEnabled = true;
+            //transportJob transportJob = db.TransportJobs.Find(id);
+            var transportJob = transportService.GetallArtWork();
+            if (transportJob == null)
+            {
+                return HttpNotFound();
+            }
+            int iduser = Convert.ToInt32(Session["user"].ToString());
+            float wage= 0;
+            var yo = transportJob;
+            foreach (var VARIABLE in yo)
+            {
+                if (VARIABLE.transporterID==iduser && VARIABLE.Status=="Completed")
+                {   DateTime di = DateTime.Now.AddMonths(-1);
+                    DateTime da = DateTime.Now.AddMonths(1);
+                    if (VARIABLE.DateDeDefin>=di && VARIABLE.DateDeDefin<=da )
+                    {
+                        
+                    
+               
+
+            foreach (artwork art in VARIABLE.orders.artwork)
+            {
+                wage =+ (art.price / 100);
+            }
+
+                }
+                }
+
+            }
+            ViewBag.wage = wage;
+               
+            /* var balance = (from a in db.TransportJobs
+                            join c in db.orders on a.orders equals c.Id
+                            where c.ClientID == yourDescriptionObject.ClientID
+                            select a.Balance)
+               .SingleOrDefault();*/
+           /* MailMessage o = new MailMessage("ayed.maissen@gmail.com", "ayed.maissen@gmail.com");
+            o.BodyEncoding = Encoding.UTF8;
+            o.IsBodyHtml = true;
+            o.Subject = "Sending Email Using Asp.Net & C#";*/
+           /* var fileName = yo.title;
+            var filePath = Path.Combine(Server.MapPath("/Temp"), fileName);
+
+            var myPDF = new ViewAsPdf("Invoicemonth", yo)
+            {
+                FileName = fileName,
+                PageSize = Size.A5,
+                SaveOnServerPath = filePath
+            };
+            byte[] applicationPDFData = myPDF.BuildPdf(ControllerContext);
+            MemoryStream stream = new MemoryStream(applicationPDFData);
+            Attachment attachment = new Attachment(stream, "document.pdf");
+            o.Attachments.Add(attachment);
+            NetworkCredential netCred = new NetworkCredential("ayed.maissen@gmail.com", "maissenayedbrifry");
+            SmtpClient smtpobj = new SmtpClient("smtp.gmail.com", 587);
+            smtpobj.EnableSsl = true;
+            smtpobj.Credentials = netCred;
+            smtpobj.Send(o);
+            */
+
+
+
+
+
+
+
+
+
+            return new ViewAsPdf("Invoicemonth",yo.ToList());
+
+        }
+
+
+
+
 
         // GET: transportJobs/Edit/5
         public ActionResult Edit(int? id)
@@ -188,5 +365,6 @@ namespace Apollo.ASP.Controllers
             }
             base.Dispose(disposing);
         }
+
     }
 }

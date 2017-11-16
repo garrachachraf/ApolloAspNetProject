@@ -1,0 +1,43 @@
+﻿
+
+<div class="row border-bottom white-bg">
+    <nav class="navbar navbar-static-top" role="navigation">
+        <div class="navbar-header">
+            <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
+                <i class="fa fa-reorder"></i>
+            </button>
+            <a href="#" class="navbar-brand">Apollo</a>
+        </div>
+        <div class="navbar-collapse collapse" id="navbar">
+           
+            <ul class="nav navbar-top-links navbar-right">
+                <li>
+                    <a href="@Url.Action( "Index", "NewsLetters")"><i class='fa fa-envelope'></i> NewsLetters</a>
+                </li>
+                <li>
+                    <div class="dropdown">
+                        <button class="btn btn-default" type="button" data-toggle="dropdown">
+                            <i class='fa fa-bank'></i> Planification
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="@Url.Action( "Index", "Planification")"><i class='fa fa-tasks'></i> incomeTicket</a></li>
+                            <li><a href="@Url.Action( "Index", "Planification")"><i class='fa fa-first-order'></i> IncomeOrder</a></li>
+                            <li><a href="@Url.Action( "Index", "Planification")"><i class='fa fa-bar-chart'></i> IncomeChart</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a href="@Url.Action( "Index", "Statistics")"><i class='fa fa-area-chart'></i>Statistic</a>
+                </li>
+
+                <li>
+                    <a href="@Url.Action( "Index", "Conversions")"><i class='fa fa-whatsapp'></i>Conversions</a>
+                </li>
+
+                <li>
+                    <a href="@Url.Action( "Logout", "Home")"><i class='fa fa-sign-out'></i>Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>

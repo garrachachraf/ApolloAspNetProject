@@ -2,65 +2,112 @@
 
 @{
     ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout_2.cshtml";
 }
 
-<h2>Edit</h2>
+<div class="row" style="higth:20px;padding:10px;">
 
-
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>NewsLetter</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Id)
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.To, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.To, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.To, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Subject, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Subject, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.msg, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.msg, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.msg, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.nbrecivers, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.nbrecivers, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.nbrecivers, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
 </div>
+<div class="row ">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>All form elements <small>With custom checbox and radion elements.</small></h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-wrench"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li>
+                            <a href="#">Config option 1</a>
+                        </li>
+                        <li>
+                            <a href="#">Config option 2</a>
+                        </li>
+                    </ul>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <div class="form-horizontal">
 
-@section Scripts {
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.Id)
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.To, htmlAttributes: new { @class = "col-sm-2 control-label" })
+                            <div class="col-md-10">
+                                <select name="TO" id="TO" class="form-control">
+                                    <option value="ALL">ALL</option>
+                                    <option value="USERS">USERS</option>
+                                    <option value="GO">Gallery Owners</option>
+                                    <option value="Artists">Artists</option>
+                                </select>
+
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Subject, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Subject, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.msg, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    <textarea id="msg" name="msg" class="summernote">@Model.msg</textarea>
+
+                                </div>
+                            </div>
+
+                            <div class="hr-line-dashed"></div>
+
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Save" class="btn btn-default" />
+                                </div>
+                            </div>
+                        
+                    }
+
+                    <div>
+                        @Html.ActionLink("Back to List", "Index")
+                    </div>
+                </div>
+            </div>
+
+     </div>
+</div>
+  
+    @section Styles {
+        @Styles.Render("~/plugins/summernoteStyles")
+        @Styles.Render("~/Content/plugins/iCheck/iCheckStyles")
+    }
+
+    @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-}
+        @Scripts.Render("~/plugins/summernote")
+
+        <script type="text/javascript">
+                    $(document).ready(function () {
+
+                        $('.summernote').summernote();
+
+                    });
+
+        </script>
+    }
+

@@ -30,12 +30,24 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="RestSharp, Version=106.0.0.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
       <HintPath>..\packages\RestSharp.106.0.0\lib\net452\RestSharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web" />
@@ -54,15 +66,24 @@
     <Compile Include="GestionConversation.cs" />
     <Compile Include="GestionMessage.cs" />
     <Compile Include="IGestionArtWork.cs" />
+
     <Compile Include="IGestionConversation.cs" />
     <Compile Include="IGestionMessage.cs" />
+
+    <Compile Include="ILoginService.cs" />
+
     <Compile Include="IMailService.cs" />
     <Compile Include="INewsLetterOpensService.cs" />
     <Compile Include="INewsLetterService.cs" />
+    <Compile Include="IPdfService.cs" />
+    <Compile Include="ITransporterService.cs" />
+    <Compile Include="LoginService.cs" />
     <Compile Include="MailService.cs" />
     <Compile Include="NewsLetterService.cs" />
     <Compile Include="NewsLettersOpensService.cs" />
+    <Compile Include="PdfService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TransporterService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Apollo.Data\Apollo.Data.csproj">
@@ -79,10 +100,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>
