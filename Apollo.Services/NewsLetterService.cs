@@ -24,10 +24,18 @@ namespace Apollo.Services
         }
         public void SendEmailsTo(NewsLetter newsletter)
         {
-            getAll(newsletter.To).ForEach(u => {
+            int nb = 0;
+            getAll("artists").ForEach(u => {
+                //Console.WriteLine(u.email);
+                nb++;
+                newsletter.msg = newsletter.msg + "<img src=http://wild.apollo-esprit.net:2752/NewsLetterOpens/Opened/?newsletterid=" + newsletter.Id+ "&userid="+u.id+ "  height=1 width=1>";
                 ms.SendThisMail(u.email, newsletter.Subject, newsletter.msg);
             });
             
+            db.newsletter.Attach(newsletter);
+            newsletter.nbrecivers = nb;
+            db.SaveChanges();
+
         }
 
         public int NbOpens(NewsLetter newsletter)
@@ -45,13 +53,22 @@ namespace Apollo.Services
 
         private List<user> getAll(String role)
         {
-            
-            var restClient = new RestClient("https://api.getdropbox.com");
+            string to = "";
+            switch (role)
+            {
+                case "Artists": to = "artists";
+                    break;
+                case "GO": to = "gowners";
+                    break;
+
+            }
+            var restClient = new RestClient("http://wild.apollo-esprit.net:18080/Apollo-web/app/Profile/"+to);
             var request = new RestRequest(Method.GET);
-            request.Resource = "Profile/{role}";
-            request.AddParameter("role", role);
+            
             var response = restClient.Execute<List<user>>(request);
             return response.Data;
         }
+
+
     }
 }

@@ -1,16 +1,11 @@
-﻿using MyFinance.Data.Infrastructures;
+﻿using Apollo.Data.Infrastructures;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-using Apollo.Data.Infrastructures;
-using Apollo.ServicePattern;
 
 namespace Apollo.ServicePattern
 {
-   public class Service<T> : IService<T> where T : class
+    public class Service<T> : IService<T> where T : class
     {
         UnitOfWork utw;
 

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Antlr.Runtime.Tree;
 using Apollo.Data;
 using Apollo.Domain.entities;
 using Apollo.Services;
@@ -16,6 +17,7 @@ namespace Apollo.ASP.Controllers
     {
         private JeeModel db = new JeeModel();
         private GestionArtWork ga=new GestionArtWork();
+        
 
         // GET: artworks
         public ActionResult Index()
@@ -25,13 +27,13 @@ namespace Apollo.ASP.Controllers
         }
 
         // GET: artworks/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var artwork = db.artwork.Find(id);
+            var artwork = ga.FindById(id);
             if (artwork == null)
             {
                 return HttpNotFound();
@@ -42,7 +44,7 @@ namespace Apollo.ASP.Controllers
         // GET: artworks/Create
         public ActionResult Create()
         {
-            ViewBag.artist_id = new SelectList(db.user, "id", "role");
+           
             return View();
         }
 
@@ -55,28 +57,28 @@ namespace Apollo.ASP.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.artwork.Add(artwork);
-                db.SaveChanges();
+               ga.Create(artwork);
+             
                 return RedirectToAction("Index");
             }
 
-            ViewBag.artist_id = new SelectList(db.user, "id", "role", artwork.artist_id);
+          
             return View(artwork);
         }
 
         // GET: artworks/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            artwork artwork = db.artwork.Find(id);
+            artwork artwork = ga.FindById(id);
             if (artwork == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.artist_id = new SelectList(db.user, "id", "role", artwork.artist_id);
+           
             return View(artwork);
         }
 
@@ -88,23 +90,31 @@ namespace Apollo.ASP.Controllers
         public ActionResult Edit([Bind(Include = "id,category,descreption,mediaPath,price,releaseDate,title,uploadDate,artist_id")] artwork artwork)
         {
             if (ModelState.IsValid)
+                
             {
-                db.Entry(artwork).State = EntityState.Modified;
-                db.SaveChanges();
+
+                artwork Yartwork = ga.FindById(artwork.id);
+                Yartwork.title = artwork.title;
+                Yartwork.descreption = artwork.descreption;
+                Yartwork.price = artwork.price;
+                
+
+                ga.Update(Yartwork);
+               
                 return RedirectToAction("Index");
             }
-            ViewBag.artist_id = new SelectList(db.user, "id", "role", artwork.artist_id);
+         
             return View(artwork);
         }
 
         // GET: artworks/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            artwork artwork = db.artwork.Find(id);
+            artwork artwork = ga.FindById(id);
             if (artwork == null)
             {
                 return HttpNotFound();
@@ -117,19 +127,19 @@ namespace Apollo.ASP.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            artwork artwork = db.artwork.Find(id);
-            db.artwork.Remove(artwork);
-            db.SaveChanges();
+            artwork artwork = ga.FindById(id);
+            ga.remove(artwork);
+
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
+       /* protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                db.Dispose();
+                ga.Dispose();
             }
             base.Dispose(disposing);
-        }
+        }*/
     }
 }

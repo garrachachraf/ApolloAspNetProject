@@ -1,0 +1,85 @@
+﻿@model IEnumerable<Apollo.Domain.entities.Conversation>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout_2.cshtml";
+}
+<h2>Welcome @Session["currentUser"].ToString()</h2>
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="page-header">
+            <h1 class="text-center"><i class="fa fa-envelope"></i> Customer Messages </h1>
+        </div>
+        <div class="col-lg-offset-1 col-lg-9 animated fadeInRight">
+            <div class="mail-box-header">
+
+                <form class="pull-right mail-search">
+                    <div class="input-group">
+                        <input type="text" class="form-control input-sm" name="search" placeholder="Search" id="searchword">
+                        <div class="input-group-btn">
+                            <button onclick="location.replace('?filter=' + document.getElementById('searchword').value)" class="btn btn-sm btn-primary">
+                                Search
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                <h2>
+                    Inbox (@ViewBag.gc.CountUnreadConversations())
+                </h2>
+                <div class="mail-tools tooltip-demo m-t-md">
+                    <div class="btn-group pull-right">
+                        <button class="btn btn-white btn-sm"><i class="fa fa-arrow-left"></i></button>
+                        <button class="btn btn-white btn-sm"><i class="fa fa-arrow-right"></i></button>
+
+                    </div>
+                    <button onclick="location.reload()" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="left" title="" data-original-title="Refresh inbox"><i class="fa fa-refresh"></i> Refresh</button>
+                    <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="" data-original-title="Mark as read"><i class="fa fa-eye"></i> </button>
+                    <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="" data-original-title="Mark as important"><i class="fa fa-exclamation"></i> </button>
+                    <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="" data-original-title="Move to trash"><i class="fa fa-trash-o"></i> </button>
+
+                </div>
+            </div>
+            <div class="mail-box">
+
+                <table class="table table-hover table-mail">
+                    <tbody>
+        @foreach (var item in Model)
+        {
+                        <tr class="unread">
+                            <td class="check-mail">
+                                <input type="checkbox" class="i-checks">
+                            </td>
+                            @if (item.IsSeen == true)
+                            {
+                            <td class="mail-ontact"> @Html.ActionLink(item.Client.userName, "Details", new { id = item.Id })</td>
+
+                            }
+                            else{
+                            <td class="mail-ontact"> @Html.ActionLink(item.Client.userName, "Details", new { id = item.Id })<span class="label label-danger pull-right">New message ! </span></td>
+
+                            }
+                          
+                            <td class="mail-subject"><a href="">@Html.ActionLink(item.Object, "Details", new { id = item.Id })</a></td>
+                            <td class=""><span class="label label-warning pull-right">@ViewBag.gc.CountMessages((int)item.Id, (int)item.ClientID)</span></td>
+                            <td class="text-right mail-date">@ViewBag.gc.getLastMessageDate((int)item.Id)</td>
+                        </tr>
+        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>
+<script>
+var OneSignal = OneSignal || [];
+    OneSignal.push(function () {
+        /* These examples are all valid */
+        OneSignal.sendTag("role", "Admin");
+
+    });
+</script>
+
+}

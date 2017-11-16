@@ -16,9 +16,15 @@ namespace Apollo.ASP.Controllers
     {
         private JeeModel db = new JeeModel();
         private INewsLetterService ns = new NewsLetterService();
+        private IMailService ms = new MailService();
         // GET: NewsLetters
         public ActionResult Index()
         {
+            var a = ms.GetStats().Content ;
+            a = a.ToString();
+            ViewBag.a = a ;
+            var h24 = ms.GetStatstoday().Content;
+            ViewBag.stats24h = h24;
             return View(db.newsletter.ToList());
         }
 
@@ -81,6 +87,7 @@ namespace Apollo.ASP.Controllers
         }
 
         // GET: NewsLetters/Edit/5
+        [ValidateInput(false)]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -100,6 +107,7 @@ namespace Apollo.ASP.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult Edit([Bind(Include = "Id,To,Subject,msg,nbrecivers")] NewsLetter newsLetter)
         {
             if (ModelState.IsValid)
@@ -123,6 +131,9 @@ namespace Apollo.ASP.Controllers
             {
                 return HttpNotFound();
             }
+            
+            db.newsletter.Remove(newsLetter);
+            db.SaveChanges();
             return View(newsLetter);
         }
 

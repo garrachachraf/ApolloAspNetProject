@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -49,5 +51,58 @@ namespace Apollo.Services
             request.Method = Method.POST;
             client.Execute(request);
         }
+
+
+        public IRestResponse GetStats()
+        {
+            RestClient client = new RestClient();
+            client.BaseUrl = new Uri("https://api.mailgun.net/v3");
+            client.Authenticator =
+                new HttpBasicAuthenticator("api",
+                                            "key-26abf6ebb7275b70149f28d674bca3e4");
+            RestRequest request = new RestRequest();
+            request.AddParameter("domain", "majouda.com", ParameterType.UrlSegment);
+            request.Resource = "{domain}/stats/total";
+            request.AddParameter("event", "accepted");
+            request.AddParameter("event", "delivered");
+            request.AddParameter("event", "failed");
+            request.AddParameter("duration", "1m");
+            return client.Execute(request);
+        }
+
+        public IRestResponse GetStatstoday()
+        {
+            RestClient client = new RestClient();
+            client.BaseUrl = new Uri("https://api.mailgun.net/v3");
+            client.Authenticator =
+                new HttpBasicAuthenticator("api",
+                                            "key-26abf6ebb7275b70149f28d674bca3e4");
+            RestRequest request = new RestRequest();
+            request.AddParameter("domain", "majouda.com", ParameterType.UrlSegment);
+            request.Resource = "{domain}/stats/total";
+            request.AddParameter("event", "accepted");
+            request.AddParameter("event", "delivered");
+            request.AddParameter("event", "failed");
+            request.AddParameter("duration", "1d");
+            return client.Execute(request);
+        }
+
+        public void SendMail(string to, string subject, string msg, string path, string filename, byte[] applicationPDFData)
+        {
+            MemoryStream stream = new MemoryStream(applicationPDFData);
+            MailMessage o = new MailMessage("ayed.maissen@gmail.com", "ayed.maissen@gmail.com");
+            o.BodyEncoding = Encoding.UTF8;
+            o.IsBodyHtml = true;
+            o.Subject = "Sending Email Using Asp.Net & C#";
+            Attachment attachment = new Attachment(stream, "document.pdf");
+            o.Attachments.Add(attachment);
+            NetworkCredential netCred = new NetworkCredential("ayed.maissen@gmail.com", "maissenayedbrifry");
+            SmtpClient smtpobj = new SmtpClient("smtp.gmail.com", 587);
+            smtpobj.EnableSsl = true;
+            smtpobj.Credentials = netCred;
+            smtpobj.Send(o);
+        }
+
+
     }
 }

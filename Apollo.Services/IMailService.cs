@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RestSharp;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,5 +11,7 @@ namespace Apollo.Services
     {
         void SendThisMail(string to, string subject, string msg);
         void SendMailInvoice(string to, string subject, string msg, string path , string filename);
+        IRestResponse GetStats();
+        IRestResponse GetStatstoday();
     }
 }

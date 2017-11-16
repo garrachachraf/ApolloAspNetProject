@@ -10,20 +10,17 @@ namespace Apollo.Data.Infrastructures
     public class UnitOfWork
     {
         private DatabaseFactory dbfactory;
-        private JeeModel ctx;
+        public JeeModel ctx { get; set; }
         public UnitOfWork(DatabaseFactory dbFactory)
         {
             this.dbfactory = dbFactory;
             ctx = dbfactory.Mycontext;
 
         }
-        public JeeModel Ctx
-        {
-            get { return Ctx; }
-        }
+
         public void commit()
         {
-            Ctx.SaveChanges();
+            ctx.SaveChanges();
         }
 
         public RepositoryBase<T> GetRepository<T>() where T : class
