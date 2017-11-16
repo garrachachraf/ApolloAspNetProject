@@ -12,26 +12,26 @@
             <div class="col-md-2">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <span class="label label-success pull-right">Monthly</span>
-                        <h5>Views</h5>
+                        <span class="label label-success pull-right">Last Month</span>
+                        <h5>Sends</h5>
                     </div>
                     <div class="ibox-content">
-                        <h1 class="no-margins">386,200</h1>
-                        <div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i></div>
-                        <small>Total views</small>
+                        <h1 class="no-margins" id="totals">62680</h1>
+                        <div class="stat-percent font-bold text-success">3% <i class="fa fa-bolt"></i></div>
+                        <small>Total emails</small>
                     </div>
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <span class="label label-info pull-right">Annual</span>
-                        <h5>Orders</h5>
+                        <span class="label label-info pull-right">24Hours</span>
+                        <h5>Emails</h5>
                     </div>
                     <div class="ibox-content">
-                        <h1 class="no-margins">80,800</h1>
+                        <h1 class="no-margins" id="totals24" name="totals24">80,800</h1>
                         <div class="stat-percent font-bold text-info">20% <i class="fa fa-level-up"></i></div>
-                        <small>New orders</small>
+                        <small>Emails Sent</small>
                     </div>
                 </div>
             </div>
@@ -39,19 +39,19 @@
             <div class="col-md-4">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <span class="label label-primary pull-right">Today</span>
-                        <h5>Vistits</h5>
+                        <span class="label label-primary pull-right">Last Month</span>
+                        <h5>Protocols Used</h5>
                     </div>
                     <div class="ibox-content">
 
                         <div class="row">
                             <div class="col-md-6">
-                                <h1 class="no-margins">$ 406,420</h1>
-                                <div class="font-bold text-navy">44% <i class="fa fa-level-up"></i> <small>Rapid pace</small></div>
+                                <h1 class="no-margins" id="http" name="http">406,420</h1>
+                                <div class="font-bold text-navy" id="percenthttp">00%<i class="fa fa-level-up"></i> <small>HTTP</small></div>
                             </div>
                             <div class="col-md-6">
-                                <h1 class="no-margins">206,120</h1>
-                                <div class="font-bold text-navy">22% <i class="fa fa-level-up"></i> <small>Slow pace</small></div>
+                                <h1 class="no-margins" id="smtp" name="smtp">206,120</h1>
+                                <div class="font-bold text-navy"  id="percentsmtp">00% <i class="fa fa-level-up"></i> <small>SMTP</small></div>
                             </div>
                         </div>
 
@@ -62,15 +62,16 @@
             <div class="col-md-4">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>Monthly income</h5>
+                        <h5>Monthly spend  </h5>
                         <div class="ibox-tools">
-                            <span class="label label-primary">Updated 12.2015</span>
+                            <span class="label label-primary pull-right">Updated <div id="thedate"></div></span>
                         </div>
                     </div>
-                    <div class="ibox-content no-padding">
-                        <div class="flot-chart m-t-lg" style="height: 55px;">
-                            <div class="flot-chart-content" id="flot-chart1"></div>
-                        </div>
+                    <div class="ibox-content">
+                        
+                            <h1 class="no-margins" id="flot-chart1">&nbsp;</h1>
+                        <div class="stat-percent font-bold text-info"> &nbsp;</div>
+                        <small>&nbsp;</small>
                     </div>
 
                 </div>
@@ -85,15 +86,13 @@
                     <div class="ibox-title">
                         <h5>Custom responsive table </h5>
                         <div class="ibox-tools">
-                            <a class="collapse-link">
-                                <i class="fa fa-chevron-up"></i>
-                            </a>
+                           
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                <i class="fa fa-wrench"></i>
+                                <i class="fa fa-plus"></i>
                             </a>
                             <ul class="dropdown-menu dropdown-user">
                                 <li>
-                                    @Html.ActionLink("Create New", "Create");
+                                    @Html.ActionLink("Create New", "Create")
                                 </li>
                                
                             </ul>
@@ -129,9 +128,7 @@
                                         <th>
                                             @Html.DisplayNameFor(model => model.Subject)
                                         </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.msg)
-                                        </th>
+                                       
                                         <th>
                                             @Html.DisplayNameFor(model => model.nbrecivers)
                                         </th>
@@ -146,18 +143,18 @@
                                                 @Html.DisplayFor(modelItem => item.To)
                                             </td>
                                             <td>
-                                                @Html.DisplayFor(modelItem => item.Subject)
+                                                <a href="@Url.Action("Details", "Newsletters", new { id = item.Id })"> @Html.DisplayFor(modelItem => item.Subject)</a>
                                             </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.msg)
-                                            </td>
+                                            
                                             <td>
                                                 @Html.DisplayFor(modelItem => item.nbrecivers)
                                             </td>
                                             <td>
-                                                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                                                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                                                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                                                @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-warning btn-sm " }) |
+                                                @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-primary btn-sm " }  ) |
+                                               
+                                                
+                                                <button class="btn btn-danger btn-sm "  onclick="myFunction(@item.Id)">Delete</button>
                                             </td>
                                         </tr>
                                     }
@@ -176,10 +173,71 @@
 
 </div>
 
+@section Styles {
+    @Styles.Render("~/plugins/sweetAlertStyles")
+}
+
+
 @section Scripts {
     @Scripts.Render("~/plugins/flot")
     @Scripts.Render("~/plugins/chartJs")
     @Scripts.Render("~/plugins/peity")
+    @Scripts.Render("~/plugins/sweetAlert")
+    <script>
+        var json = '@Html.Raw(ViewBag.a)';
+        obj = JSON.parse(json);
+        stats = JSON.parse(JSON.stringify(obj.stats));
+        delivered = JSON.parse(JSON.stringify(stats[0].delivered));
+        document.getElementById("totals").innerHTML = delivered.total;
+        document.getElementById("http").innerHTML = delivered.smtp;
+        document.getElementById("smtp").innerHTML = delivered.http;
+        document.getElementById("thedate").innerHTML = stats[0].time;
+        document.getElementById("percenthttp").innerHTML = '%' + ((delivered.smtp / delivered.total) * 100) + '<i class="fa fa-level-up"></i>';
+        document.getElementById("percentsmtp").innerHTML = '%' + ((delivered.http / delivered.total) * 100) + '<i class="fa fa-level-up"></i>';
 
-    
+        var json24 = '@Html.Raw(ViewBag.stats24h)';
+        obj24 = JSON.parse(json24);
+        stats24 = JSON.parse(JSON.stringify(obj24.stats));
+        console.log(JSON.stringify(obj24.stats));
+        delivered24 = JSON.parse(JSON.stringify(stats24[0].delivered));
+        document.getElementById("totals24").innerHTML = delivered24.total;
+        var spend = 0.00050 * delivered.total;
+        spend = '$ ' + spend.toFixed(10);
+        document.getElementById("flot-chart1").innerHTML = spend;
+    </script>
+
+
+    <script>
+        function myFunction(ids) {
+           
+            swal({
+                title: "Are you sure?",
+                text: "Your will not be able to recover this newsletter!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, delete it!",
+                cancelButtonText: "No, cancel plx!",
+                closeOnConfirm: false,
+                closeOnCancel: false
+            },
+                    function (isConfirm) {
+                        if (isConfirm) {
+                            $.ajax({
+                                url: '@Url.Action("Delete")/'+ids,
+                                type: 'GET',
+                                success:function(data) {
+                                    swal("Deleted!", "Your newsletter has been deleted.", "success");
+                                }
+                            });
+                            
+                            setTimeout(location.reload.bind(location), 3000);
+                        } else {
+                            swal("Cancelled", "Your newsletter is safe :)", "error");
+                        }
+                    });
+        };
+        
+
+    </script>
 }
