@@ -1,0 +1,91 @@
+﻿@model Apollo.Domain.entities.planification
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/FinancerLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div class="ibox-content">
+    <h4>Planification</h4>
+    <hr />
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.id, "ID", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.id, new { htmlAttributes = new { @class = "form-control", disabled = "" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.startDate, "Start Date", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.startDate, new { htmlAttributes = new { @class = "form-control", disabled = "" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.finishDate, "Finish Date", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.finishDate, new { htmlAttributes = new { @class = "form-control", disabled = "" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Description</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.description, new { htmlAttributes = new { @class = "form-control", disabled = "" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Income Source</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.incomeSource, new { htmlAttributes = new { @class = "form-control", disabled = "" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.amount, "Amount", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.amount, new { htmlAttributes = new { @class = "form-control", disabled = "" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.period, "Period", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.period, new { htmlAttributes = new { @class = "form-control", disabled = "" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.updateDate, "Last Update Date", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.updateDate, new { htmlAttributes = new { @class = "form-control", disabled = "" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.financer.lastname, "Updated By ", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.financer.lastname, new { htmlAttributes = new { @class = "form-control", disabled = "" } })
+            </div>
+        </div>
+        <br />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                @Html.ActionLink("Cancel", "Index", new { id = Model.id }, new { @class = "btn btn-outline btn-default" })
+                @Html.ActionLink("Delete", "Delete", new { id = Model.id }, new { @class = "btn btn-outline btn-danger" })
+            </div>
+        </div>
+    </div>
+    <br />
+    <br />
+    <br />
+</div>

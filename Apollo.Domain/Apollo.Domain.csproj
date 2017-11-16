@@ -88,10 +88,12 @@
     <Compile Include="entities\NewsLettersOpens.cs" />
     <Compile Include="entities\notification.cs" />
     <Compile Include="entities\orders.cs" />
+    <Compile Include="entities\planification.cs" />
     <Compile Include="entities\rating.cs" />
     <Compile Include="entities\schedule.cs" />
     <Compile Include="entities\showroom.cs" />
     <Compile Include="entities\ticket.cs" />
+    <Compile Include="entities\toDo.cs" />
     <Compile Include="entities\transportJob.cs" />
     <Compile Include="entities\user.cs" />
     <Compile Include="entities\whishlist.cs" />

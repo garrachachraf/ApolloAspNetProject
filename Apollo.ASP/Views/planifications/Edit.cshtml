@@ -1,0 +1,118 @@
+﻿@model Apollo.Domain.entities.planification
+
+@{
+    ViewBag.Title = "Update";
+    Layout = "~/Views/Shared/FinancerLayout.cshtml";
+}
+
+<h2>Update</h2>
+<h4>Planification</h4>
+
+@using (Html.BeginForm())
+{
+
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        <div class="form-group has-error "><label class="col-md-8 control-label"> @ViewBag.DateErrorMessage </label></div>
+        <br />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.id, "ID", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.id, new { htmlAttributes = new { @class = "form-control", disabled = "" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.startDate, "Start Date", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.startDate, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.finishDate, "Finish Date", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.finishDate, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Description <br /><small class="text-navy">Optional</small></label>
+            @*@Html.LabelFor(model => model.description, "Description", htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.description, new { htmlAttributes = new { @class = "form-control", placeholder = "" } })
+                @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.incomeSource, "Income Source", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-sm-10">
+
+                <div class="radio i-checks">
+                    @Html.RadioButtonFor(m => m.incomeSource, "Orders")   Orders <br /><br />
+                    @Html.RadioButtonFor(m => m.incomeSource, "Tickets")  Tickets
+                </div>
+                <br />
+                @*@Html.RadioButtonFor(m => m.incomeSource, "Tickets"),  new { Checked = "checked" } )*@
+                @Html.ValidationMessageFor(model => model.incomeSource, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.period, "Period", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.period, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.amount, "Amount", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.amount, new { htmlAttributes = new { @class = "form-control", placeholder = "Planification Amount in Tunisian Dinar (TND)", required = "required" } })
+                @Html.ValidationMessageFor(model => model.amount, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.updateDate, "Last Update Date", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.updateDate, new { htmlAttributes = new { @class = "form-control", disabled = "" } })
+         </div>
+        </div>
+
+
+        <br />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-outline btn-default" })
+                <input type="submit" value="Save" class="btn btn-outline btn-warning" />
+            </div>
+        </div>
+        <br />
+        <br />
+        <br />
+    </div>  
+}
+@section Styles {
+    @Styles.Render("~/Content/plugins/iCheck/iCheckStyles")
+}
+
+@section Scripts {
+    @Scripts.Render("~/plugins/iCheck")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+
+        });
+    </script>
+}

@@ -24,7 +24,7 @@ namespace Apollo.ASP.Controllers
         public ActionResult Index([Bind(Include = "password,userName")] user user)
         {
            
-                var client = new RestClient("http://10.0.2.2:18080/Apollo-web/app/");
+                var client = new RestClient("http://127.0.0.1:18080/Apollo-web/app/");
                 var request = new RestRequest("users/login", Method.POST);
                 request.AddHeader("Content-type", "application/x-www-form-urlencoded");
                 request.AddParameter("login", user.userName);
@@ -44,7 +44,7 @@ namespace Apollo.ASP.Controllers
                 return RedirectToAction("Index");
 
             }
-            return RedirectToAction("Index", "transportJobs"); ;
+            return RedirectToAction("Index", "toDoes"); ;
            
         }
         

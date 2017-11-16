@@ -460,6 +460,9 @@ namespace Apollo.ASP
                         "~/Scripts/plugins/pwstrength/pwstrength-bootstrap.min.js",
                         "~/Scripts/plugins/pwstrength/zxcvbn.js"));
 
+            //datepicker
+            bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
+                        "~/Scripts/modernizr-*"));
 
         }
     }

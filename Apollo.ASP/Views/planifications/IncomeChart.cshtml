@@ -1,0 +1,146 @@
+﻿@{
+    ViewBag.Title = "Income Charts";
+    Layout = "~/Views/Shared/FinancerLayout.cshtml";
+}
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2>Chart Income</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="@Url.Action("Index", "planification")">Planifications</a>
+                </li>
+                <li>
+                    <a>Income</a>
+                </li>
+                <li class="active">
+                    <strong>Income Charts</strong>
+                </li>
+            </ol>
+        </div>
+    </div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Planned </h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-wrench"></i>
+                        </a>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="flot-chart">
+                        <div class="flot-chart-pie-content" id="flot-pie-chart-plan"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Realized</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-wrench"></i>
+                        </a>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="flot-chart">
+                        <div class="flot-chart-pie-content" id="flot-pie-chart"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/plugins/flot")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+
+            var data = [{
+                label: "Tickets",
+                data: Math.round(Number(@ViewBag.ticketsIncome)),
+                color: "#d3d3d3",
+            }, {
+                label: "Orders",
+                data: Math.round(Number(@ViewBag.ordersIncome)),
+                color: "#1ab394",
+            }];
+
+            var plotObj = $.plot($("#flot-pie-chart"), data, {
+                series: {
+                    pie: {
+                        show: true
+                    }
+                },
+                grid: {
+                    hoverable: true
+                },
+                tooltip: true,
+                tooltipOpts: {
+                    content: "%p.0% %s", 
+                    shifts: {
+                        x: 20,
+                        y: 0
+                    },
+                    defaultTheme: false
+                }
+            });
+
+            var dataplan = [{
+                label: "Tickets",
+                data: Math.round(Number(@ViewBag.ticketsPlanif)),
+                color: "#d3d3d3",
+            }, {
+                label: "Orders",
+                data: Math.round(Number(@ViewBag.ordersPlanif)),
+                color: "#1ab394",
+            }];
+
+            var planObj = $.plot($("#flot-pie-chart-plan"), dataplan, {
+                series: {
+                    pie: {
+                        show: true
+                    }
+                },
+                grid: {
+                    hoverable: true
+                },
+                tooltip: true,
+                tooltipOpts: {
+                    content: "%p.0% %s",
+                    shifts: {
+                        x: 20,
+                        y: 0
+                    },
+                    defaultTheme: false
+                }
+            });
+
+  });
+
+    </script>
+}

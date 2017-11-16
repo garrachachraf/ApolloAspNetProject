@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Apollo.Domain.entities.toDo>
+
+@{
+    ViewBag.Title = "toDoes";
+    Layout = "~/Views/Shared/FinancerLayout.cshtml";
+}
+
+<h2>To Does</h2>
+<br />
+<div>
+    @Html.ActionLink("Add", "Create", null, new { @class = "btn btn-primary" })
+</div>
+<br />
+ <div class="ibox-content">
+        <h2>TODO Tasks</h2>
+        <small>This list of my pending tasks</small>
+        <ul class="todo-list m-t small-list">
+
+        
+            @{ int idcurrent = Convert.ToInt32(Session["user"].ToString());}
+
+            @foreach (var task in Model)
+            {
+                if (task.financer.id == idcurrent && task.deadlineDate > DateTime.Now)
+                {
+                    if (task.status == 0)
+                    {
+                        <li >
+                            <a href="#" onclick="changestat(@task.id)" class="check-link"><i class="fa fa-square-o" ></i> </a>
+                            <span  class="m-l-xs">@task.toDoStr</span>
+                        </li>
+                    }
+                    else
+                    {
+                        <li  >
+                            <a href="#" class="check-link" onclick="changestat(@task.id)"><i class="fa fa-check-square"></i> </a>
+                            <span  class="m-l-xs  todo-completed" >@task.toDoStr</span>
+                        </li>
+                    }
+                }
+            }
+        </ul>
+</div>
+
+@section Scripts {
+    <script>
+        function changestat(idtask) {
+            $.ajax({
+                url: '@Url.Action("SwitchTask")/'+idtask,
+                type: 'GET',
+                success:function(data) {
+                    //  
+                } 
+            });
+        }
+    </script>
+    
+    }

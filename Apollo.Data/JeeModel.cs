@@ -9,7 +9,7 @@ namespace Apollo.Data
     using System.Data.Entity;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
-   [DbConfigurationType(typeof(MySqlEFConfiguration))]
+    [DbConfigurationType(typeof(MySqlEFConfiguration))]
     public partial class JeeModel : DbContext
     {
         public JeeModel()
@@ -35,6 +35,7 @@ namespace Apollo.Data
         public virtual DbSet<NewsLetter> newsletter { get; set; }
         public virtual DbSet<NewsLettersOpens> newsletteropens { get; set; }
         public virtual DbSet<transportJob> TransportJobs { get; set; }
+        public virtual DbSet<planification> planifications { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<NewsLettersOpens>()
@@ -175,7 +176,7 @@ namespace Apollo.Data
                 .IsUnicode(false);
 
             modelBuilder.Entity<ticket>()
-                .Property(e => e.description)
+                .Property(e => e.note)
                 .IsUnicode(false);
 
             modelBuilder.Entity<ticket>()
@@ -292,6 +293,8 @@ namespace Apollo.Data
                 .WithOptional(e => e.whishlist)
                 .HasForeignKey(e => e.whishList_id);
         }
+
+        public System.Data.Entity.DbSet<Apollo.Domain.entities.toDo> toDoes { get; set; }
     }
     public class jeeModelContextInitialize : DropCreateDatabaseIfModelChanges<JeeModel>
     {

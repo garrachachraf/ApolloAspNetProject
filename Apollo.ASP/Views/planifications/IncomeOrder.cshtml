@@ -1,0 +1,202 @@
+﻿@model IEnumerable<Apollo.Domain.entities.orders>
+@{
+    ViewBag.Title = "Income Orders";
+    Layout = "~/Views/Shared/FinancerLayout.cshtml";
+}
+
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Income Orders</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="@Url.Action("Index", "planification")">Planifications</a>
+            </li>
+            <li>
+                <a>Income</a>
+            </li>
+            <li class="active">
+                <strong>Income Orders</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+<br />
+<br />
+
+@{  var totalOrdersIncome = 0.0;
+    var totalArtworksSolded = 0;
+    var lastOrderDate = DateTime.MinValue;
+    var lastOrderAmount = 0.0;
+ }
+@foreach (var order in Model)
+{
+    totalOrdersIncome = totalOrdersIncome + order.totalAmount;
+    totalArtworksSolded = totalArtworksSolded + order.artwork.Count;
+    lastOrderDate = (DateTime)order.orderDate;
+    lastOrderAmount = order.totalAmount;
+}
+
+<div class="row">
+    @{var OrdersPercentage = (float)(totalOrdersIncome / (ViewBag.ticketsIncome + totalOrdersIncome)) * 100; }
+      
+    <div class="col-lg-4">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <span class="label label-success pull-right">Total</span>
+                <h5>Orders Income</h5>
+            </div>
+            <div class="ibox-content">
+                <h1 class="no-margins">@totalOrdersIncome </h1>
+                <div class="stat-percent font-bold text-success">@OrdersPercentage % <i class="fa fa-pie-chart"></i></div>
+                <small>Tunisian Dinar</small>  <img src="~/Image/Tunisia16.png" alt="flag">
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <span class="label label-info pull-right">Sold</span>
+                <h5>Artworks</h5>
+            </div>
+            <div class="ibox-content">
+                <h1 class="no-margins">@totalArtworksSolded</h1>
+                <div class="stat-percent font-bold text-info"> <i class="fa fa-line-chart"></i></div>
+                <small>Artwork Sold</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <span class="label label-primary pull-right">Last</span>
+                <h5>Order</h5>
+            </div>
+            <div class="ibox-content">
+                <h1 class="no-margins">@lastOrderAmount</h1>
+                <div class="stat-percent font-bold text-navy"><i class="fa fa-eur"></i></div>
+                <small>on @lastOrderDate</small>
+            </div>
+        </div>
+    </div>
+</div>
+    <br />
+
+
+
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Basic Data Tables example with responsive plugin</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                <i class="fa fa-wrench"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+                                <li>
+                                    <a href = "#" > Config option 1</a>
+                                </li>
+                                <li>
+                                    <a href = "#" > Config option 2</a>
+                                </li>
+                            </ul>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+
+                        <table class="table table-striped table-bordered table-hover dataTables-example">
+                            <thead>
+                                <tr>
+                                    <th>Order ID</th>
+                                    <th>Order Date</th>
+                                    <th>N° of Artworks</th>
+                                    <th>Order Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @*<tr class="gradeA">
+                                        <td>Trident</td>
+                                        <td>Internet Explorer 7</td>
+                                        <td>Win XP SP2+</td>
+                                        <td class="center">7</td>
+                                        <td class="center">A</td>
+                                    </tr>*@
+
+                                    @foreach (var order in Model)
+                                    {
+                                        <tr>
+                                            <td>@Html.DisplayFor(modelItem => order.Id)</td>
+                                            <td>@Html.DisplayFor(modelItem => order.orderDate)</td>
+                                            <td>@Html.DisplayFor(modelItem => order.artwork.Count)</td>
+                                            <td>@Html.DisplayFor(modelItem => order.totalAmount)</td>
+                                        </tr>
+                                    }
+                                
+
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Order ID</th>
+                                    <th>Order Date</th>
+                                    <th>N° of Artworks</th>
+                                    <th>Order Amount</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    @section Styles {
+        @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
+    }
+
+    @section Scripts {
+        @Scripts.Render("~/plugins/dataTables")
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+
+                $('.dataTables-example').DataTable({
+                    pageLength: 25,
+                    dom: '<"html5buttons"B>lTfgitp',
+                    buttons: [
+                        { extend: 'copy' },
+                        { extend: 'csv' },
+                        { extend: 'excel', title: 'ExampleFile' },
+                        { extend: 'pdf', title: 'ExampleFile' },
+
+                        {
+                            extend: 'print',
+                            customize: function (win) {
+                                $(win.document.body).addClass('white-bg');
+                                $(win.document.body).css('font-size', '10px');
+
+                                $(win.document.body).find('table')
+                                        .addClass('compact')
+                                        .css('font-size', 'inherit');
+                            }
+                        }
+                    ]
+
+                });
+
+
+
+            });
+
+        </script>
+    }

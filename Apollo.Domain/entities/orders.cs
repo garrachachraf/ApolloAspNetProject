@@ -18,7 +18,7 @@ namespace Apollo.Domain.entities
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 
-        public float amount { get; set; }
+        public float totalAmount { get; set; }
 
         public DateTime? orderDate { get; set; }
 

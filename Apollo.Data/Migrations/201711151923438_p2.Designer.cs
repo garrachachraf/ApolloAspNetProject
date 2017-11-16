@@ -7,13 +7,13 @@ namespace Apollo.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class ach : IMigrationMetadata
+    public sealed partial class p2 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(ach));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(p2));
         
         string IMigrationMetadata.Id
         {
-            get { return "201711080019291_ach"; }
+            get { return "201711151923438_p2"; }
         }
         
         string IMigrationMetadata.Source

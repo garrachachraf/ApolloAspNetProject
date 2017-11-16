@@ -65,35 +65,13 @@
     <Compile Include="infrastructure\RepositoryBase.cs" />
     <Compile Include="infrastructure\UnitOfWork.cs" />
     <Compile Include="JeeModel.cs" />
-<<<<<<< HEAD
-    <Compile Include="Migrations\201711130137042_sdsd.cs" />
-    <Compile Include="Migrations\201711130137042_sdsd.Designer.cs">
-      <DependentUpon>201711130137042_sdsd.cs</DependentUpon>
-=======
-    <Compile Include="Migrations\201711080019291_ach.cs" />
-    <Compile Include="Migrations\201711080019291_ach.Designer.cs">
-      <DependentUpon>201711080019291_ach.cs</DependentUpon>
+    <Compile Include="Migrations\201711151857093_p1.cs" />
+    <Compile Include="Migrations\201711151857093_p1.Designer.cs">
+      <DependentUpon>201711151857093_p1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201711091035009_v6.cs" />
-    <Compile Include="Migrations\201711091035009_v6.Designer.cs">
-      <DependentUpon>201711091035009_v6.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711091043476_v7.cs" />
-    <Compile Include="Migrations\201711091043476_v7.Designer.cs">
-      <DependentUpon>201711091043476_v7.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711091053518_v8.cs" />
-    <Compile Include="Migrations\201711091053518_v8.Designer.cs">
-      <DependentUpon>201711091053518_v8.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711091056004_v9.cs" />
-    <Compile Include="Migrations\201711091056004_v9.Designer.cs">
-      <DependentUpon>201711091056004_v9.cs</DependentUpon>
->>>>>>> 691542d9c0398bc5a917bc0733da1fab929d98e7
-    </Compile>
-    <Compile Include="Migrations\201711112211468_AchMayMerge.cs" />
-    <Compile Include="Migrations\201711112211468_AchMayMerge.Designer.cs">
-      <DependentUpon>201711112211468_AchMayMerge.cs</DependentUpon>
+    <Compile Include="Migrations\201711151923438_p2.cs" />
+    <Compile Include="Migrations\201711151923438_p2.Designer.cs">
+      <DependentUpon>201711151923438_p2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -111,28 +89,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
-    <EmbeddedResource Include="Migrations\201711130137042_sdsd.resx">
-      <DependentUpon>201711130137042_sdsd.cs</DependentUpon>
-=======
-    <EmbeddedResource Include="Migrations\201711080019291_ach.resx">
-      <DependentUpon>201711080019291_ach.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201711151857093_p1.resx">
+      <DependentUpon>201711151857093_p1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711091035009_v6.resx">
-      <DependentUpon>201711091035009_v6.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711091043476_v7.resx">
-      <DependentUpon>201711091043476_v7.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711091053518_v8.resx">
-      <DependentUpon>201711091053518_v8.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711091056004_v9.resx">
-      <DependentUpon>201711091056004_v9.cs</DependentUpon>
->>>>>>> 691542d9c0398bc5a917bc0733da1fab929d98e7
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711112211468_AchMayMerge.resx">
-      <DependentUpon>201711112211468_AchMayMerge.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201711151923438_p2.resx">
+      <DependentUpon>201711151923438_p2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

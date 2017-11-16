@@ -12,7 +12,7 @@ namespace Apollo.Domain.entities
         public int id { get; set; }
 
         [StringLength(255)]
-        public string description { get; set; }
+        public string note { get; set; }
 
         public DateTime? orderDate { get; set; }
 

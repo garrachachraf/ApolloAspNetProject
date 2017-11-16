@@ -1,0 +1,212 @@
+﻿@model IEnumerable<Apollo.Domain.entities.ticket>
+@{
+    ViewBag.Title = "Income Tickets";
+    Layout = "~/Views/Shared/FinancerLayout.cshtml";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Orders Income</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="@Url.Action("Index", "planification")">Planifications</a>
+            </li>
+            <li>
+                <a>Income</a>
+            </li>
+            <li class="active">
+                <strong>Income Tickets</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+<br />
+<br />
+@{  var totalTicketsIncome = 0.0;
+    var totalTicketsSolded = 0;
+    var vipTickets = 0;
+    var vipTicketsIncome = 0.0;
+    var nextEventName = String.Empty;
+    var nextEventCapacity = 0;
+    var nextEventDate = DateTime.MaxValue;
+}
+@foreach (var ticket in Model)
+{
+    totalTicketsIncome = (float)(totalTicketsIncome + ticket.price);
+    totalTicketsSolded++;
+    if ((DateTime)ticket._event.startDate < nextEventDate && (DateTime)ticket._event.startDate > DateTime.Now)
+    {
+        nextEventDate = (DateTime)ticket._event.startDate;
+        nextEventName = ticket._event.title;
+        nextEventCapacity = (int)ticket._event.capacity;
+    }
+    if (ticket.title.Equals("VIP"))
+    {
+
+        vipTickets++;
+        vipTicketsIncome = (float)(vipTicketsIncome + ticket.price);
+    }
+}
+
+<div class="row">
+    <div class="col-lg-3">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <span class="label label-success pull-right">Total</span>
+                <h5>Tickets Income</h5>
+            </div>
+            @{var TicketsPercentage = (float)(totalTicketsIncome / (ViewBag.ordersIncome + totalTicketsIncome)) * 100; }
+            <div class="ibox-content">
+                <h1 class="no-margins">@totalTicketsIncome </h1>
+                <div class="stat-percent font-bold text-success">@TicketsPercentage %<i class="fa fa-pie-chart"></i></div>
+                <small>Tunisian Dinar</small>  <img src="~/Image/Tunisia16.png" alt="flag">
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <span class="label label-info pull-right">Sold</span>
+                <h5>Tickets</h5>
+            </div>
+            <div class="ibox-content">
+                <h1 class="no-margins">@totalTicketsSolded</h1>
+                <div class="stat-percent font-bold text-info"> <i class="fa fa-bar-chart"></i></div>
+                <small>Ticket Sold</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <span class="label label-primary pull-right">VIP</span>
+                <h5>VIP Tickets</h5>
+            </div>
+            <div class="ibox-content">
+                @{ var vipPercentage = (float)((vipTicketsIncome / totalTicketsIncome) * 100);
+                    }
+                <h1 class="no-margins">@vipTicketsIncome TND  <img src="~/Image/Tunisia32.png" alt="flag"></h1>
+                <div class="stat-percent font-bold text-navy">@vipPercentage % <i class="fa fa-money"></i></div>
+                <small>@vipTickets Sold</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <span class="label label-danger pull-right">Next</span>
+                <h5>Event</h5>
+            </div>
+            <div class="ibox-content">
+                <h1 class="no-margins">@nextEventName</h1>
+                <div class="stat-percent font-bold text-danger">Capacity @nextEventCapacity <i class="fa fa-bolt"></i></div>
+                <small>on @nextEventDate</small>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Basic Data Tables example with responsive plugin</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        @*<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-wrench"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li>
+                                <a href="#">Config option 1</a>
+                            </li>
+                            <li>
+                                <a href="#">Config option 2</a>
+                            </li>
+                        </ul>*@
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+
+                  <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="8">
+                            
+                            <thead>
+                                <tr>
+
+                                    <th data-toggle="true">Order Date</th>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                    <th data-hide="all">Event Name</th>
+                                    <th data-hide="all">Description</th>
+                                    <th data-hide="all">Capacity</th>
+                                    <th data-hide="all">Start Date</th>
+                                    <th>Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var ticket in Model)
+                                {
+                                    if (ticket.title == "VIP")
+                                    { 
+                                    <tr class="ui-widget-content jqgrow ui-row-ltr ui-state-highlight">
+                                        <td>@Html.DisplayFor(modelItem => ticket.orderDate)</td>
+                                        <td>@Html.DisplayFor(modelItem => ticket.title)</td>
+                                        <td>@Html.DisplayFor(modelItem => ticket.note)</td>
+                                        <td>@Html.DisplayFor(modelItem => ticket._event.title)</td>
+                                        <td>@Html.DisplayFor(modelItem => ticket._event.description)</td>
+                                        <td>@Html.DisplayFor(modelItem => ticket._event.capacity)</td>
+                                        <td>@Html.DisplayFor(modelItem => ticket._event.startDate)</td>
+                                        <td>@Html.DisplayFor(modelItem => ticket.price)</td>
+                                    </tr>
+                                    }
+                                    else
+                                    {
+                                        <tr>
+                                            <td>@Html.DisplayFor(modelItem => ticket.orderDate)</td>
+                                            <td>@Html.DisplayFor(modelItem => ticket.title)</td>
+                                            <td>@Html.DisplayFor(modelItem => ticket.note)</td>
+                                            <td>@Html.DisplayFor(modelItem => ticket._event.title)</td>
+                                            <td>@Html.DisplayFor(modelItem => ticket._event.description)</td>
+                                            <td>@Html.DisplayFor(modelItem => ticket._event.capacity)</td>
+                                            <td>@Html.DisplayFor(modelItem => ticket._event.startDate)</td>
+                                            <td>@Html.DisplayFor(modelItem => ticket.price)</td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="5">
+                                        <ul class="pagination pull-right"></ul>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section Styles {
+    @Styles.Render("~/plugins/footableStyles")
+}
+
+@section Scripts {
+    @Scripts.Render("~/plugins/footable")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.footable').footable();
+        });
+    </script>
+}
