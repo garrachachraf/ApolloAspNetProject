@@ -1,82 +1,100 @@
 ﻿@model Apollo.Domain.entities.artwork
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
+@Html.Partial("~/Views/SessionControle.cshtml")
+<div class="ibox-content">
+    <a href="article.html" class="btn-link">
+        <h2>
+            Art Details
+        </h2>
+    </a>
+    <div class="small m-b-xs">
+        <strong>@Html.DisplayNameFor(model => model.releaseDate)</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> @Html.DisplayFor(model => model.releaseDate)</span>
+    </div>
+    <div>
 
-<h2>Details</h2>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.user.role)
+            </dt>
 
-<div>
-    <h4>artwork</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.user.role)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.user.role)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.user.role)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.category)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.category)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.category)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.category)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.descreption)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.descreption)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.descreption)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.descreption)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.mediaPath)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.mediaPath)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.mediaPath)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.mediaPath)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.price)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.price)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.price)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.price)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.releaseDate)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.releaseDate)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.releaseDate)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.releaseDate)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.title)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.title)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.title)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.title)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.uploadDate)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.uploadDate)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.uploadDate)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.uploadDate)
-        </dd>
+        </dl>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+           
 
-    </dl>
+            <p>
+                @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+                @Html.ActionLink("Back to List", "Index")
+            </p>
+        </div>
+   
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+

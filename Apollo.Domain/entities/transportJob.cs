@@ -12,6 +12,7 @@ namespace Apollo.Domain.entities
         public int id { get; set; }
         public Nullable<int> transporterID { get; set; }
         public  user transporter { get; set; }
+        public Nullable<int> ordersID { get; set; }
         public orders orders { get; set; }
         public DateTime DateDeDebut { get; set; }
         public DateTime DateDeDefin { get; set; }

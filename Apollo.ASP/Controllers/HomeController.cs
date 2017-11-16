@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using Apollo.Data;
 using Apollo.Domain.entities;
+using Apollo.Services;
 using RestSharp;
 
 namespace Apollo.ASP.Controllers
 {
     public class HomeController : Controller
     {
-        
+         private LoginService login =new LoginService();
+
         public ActionResult Index()
         {
             return View();
@@ -23,36 +26,62 @@ namespace Apollo.ASP.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Index([Bind(Include = "password,userName")] user user)
         {
-           
-                var client = new RestClient("http://10.0.2.2:18080/Apollo-web/app/");
-                var request = new RestRequest("users/login", Method.POST);
-                request.AddHeader("Content-type", "application/x-www-form-urlencoded");
-                request.AddParameter("login", user.userName);
-                request.AddParameter("password", user.password);
-                IRestResponse response = client.Execute(request);
-                var code = response.StatusCode;
-                var token = response.Content;
-            IRestResponse<user> response2 = client.Execute<user>(request);
-            var role = response2.Data.role;
+
+            IRestResponse<user> response = login.login(user);
+
+            var code = response.StatusCode;
+            var token = response.Content;
+            var role = response.Data.role;
+
             string authorizationHeader = response.Headers.ToList()
                     .Find(x => x.Name == "Authorization").Value.ToString();
                 Session["token"] = authorizationHeader;
                 ViewBag.role = role;
-                Session["user"] = response2.Data.id;
-            if (token =="Admin")
+                Session["user"] = response.Data.id;
+            if (role == "transporter")
             {
-                return RedirectToAction("Index");
 
+                return RedirectToAction("Index", "transportJobs"); ;
             }
-            return RedirectToAction("Index", "transportJobs"); ;
-           
+            if (role == "Admin")
+            {
+
+                return RedirectToAction("Index", "NewsLetters"); ;
+            }
+
+            return RedirectToAction("Index");
         }
 
+    
+
+        public ActionResult Logout()
+        {
 
 
+            Session.Clear();
+            Session.Abandon();
+            Response.Cache.SetExpires(DateTime.UtcNow.AddMinutes(-1));
+            Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            Response.Cache.SetNoStore();
 
-
-
+            try
+            {
+                Session.Abandon();
+                FormsAuthentication.SignOut();
+                Response.Cache.SetCacheability(HttpCacheability.NoCache);
+                Response.Buffer = true;
+                Response.ExpiresAbsolute = DateTime.Now.AddDays(-1d);
+                Response.Expires = -1000;
+                Response.CacheControl = "no-cache";
+                Session["user"] = null;
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                Response.Write(ex.Message);
+            }
+            return RedirectToAction("");
+        }
 
 
 

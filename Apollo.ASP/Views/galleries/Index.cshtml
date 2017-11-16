@@ -1,0 +1,117 @@
+﻿@model IEnumerable<Apollo.Domain.entities.gallery>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.user.role)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.latitude)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.longitude)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.maxCapacity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cleaningFee)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.daily)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.hourly)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.minimumBooking)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.monthly)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.securityDeposit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.weekly)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.surface)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.user.role)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.latitude)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.longitude)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.maxCapacity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cleaningFee)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.daily)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.hourly)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.minimumBooking)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.monthly)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.securityDeposit)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.weekly)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.surface)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

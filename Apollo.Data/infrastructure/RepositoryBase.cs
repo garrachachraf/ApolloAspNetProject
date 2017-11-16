@@ -44,6 +44,10 @@ namespace Apollo.Data.Infrastructures
         {
             return dbset.Find(id);
         }
+        public T FindById(int? id)
+        {
+            return dbset.Find(id);
+        }
 
         public void Remove(Expression<Func<T, bool>> condition)
         {
@@ -91,9 +95,12 @@ namespace Apollo.Data.Infrastructures
             }
             return dbset.Where(condition).OrderBy(orederby);
         }
-        public IEnumerable<T> QueryObjectGraph(Expression<Func<T, bool>> filter, string children)
+        public IQueryable<T> QueryObjectGraph( Expression<Func<T, object>> includeExpressions)
         {
-            return _objectSet.Include(children).Where(filter);
+            IQueryable<T> set = dbset;
+                set = set.Include(includeExpressions);
+            return set;
         }
+    
     }
 }
